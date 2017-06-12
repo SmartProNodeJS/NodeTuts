@@ -7,7 +7,7 @@ var httpServer=http.createServer(function(request,response){
     ;
 console.log("Method: "+method+"\nURL"+url);
 var url_arr = url.split("?");
-
+//Comment abc
 if("/hello"==url_arr[0])
 {
 response.statusCode=200;
