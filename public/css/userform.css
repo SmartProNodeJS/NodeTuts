@@ -1,0 +1,12 @@
+#user_input_id1 {
+    font-size: 30px;
+    color: red;
+    border: 2px solid black;
+}
+
+
+.user-input {
+       font-size: 10px;
+    color: black;
+    border: 2px solid red; 
+}

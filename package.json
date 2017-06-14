@@ -1,0 +1,29 @@
+{
+  "name": "tuts",
+  "version": "1.0.0",
+  "description": "Node tutorials",
+  "main": "Ex1.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "decode-html": "^1.0.2",
+    "express": "^4.15.3",
+    "nodemon": "^1.11.0",
+    "pug": "^2.0.0-rc.2",
+    "urldecode": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon simpleserver.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmartProNodeJS/NodeTuts.git"
+  },
+  "author": "abc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SmartProNodeJS/NodeTuts/issues"
+  },
+  "homepage": "https://github.com/SmartProNodeJS/NodeTuts#readme"
+}
