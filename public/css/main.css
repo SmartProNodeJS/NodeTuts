@@ -1,0 +1,24 @@
+header
+{
+    background-color: #ccc;
+    border: 1px solid #aaa;
+    height: 150px;
+    width: 100%;
+}
+
+header img { height: 150px;
+    width: 100%;}
+
+
+.body-content {
+    background-color: #fff;
+    border: none;
+    width: 100%;
+}
+footer
+{
+    height: 100px;
+    background-color: #000;
+}
+footer p {color: #fff;}
+footer p a {color: #fff;}
