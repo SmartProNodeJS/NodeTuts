@@ -19,7 +19,7 @@ app.get('/reg', function (req, res) {
         sport_list.push({"name":"volleyball","desc":"Bong chuyen"});
         sport_list.push({"name":"table_tennis","desc":"Bong ban"});
         sport_list.push({"name":"swimming","desc":"Boi/Loi"});
-    res.render('register',{"sport_list":sport_list});
+    res.render('register',{"page_title":"Register User","sport_list":sport_list});
 }); 
 
 app.post('/registerUser',urlencodedParser, function (req, res) {
@@ -30,7 +30,7 @@ app.post('/registerUser',urlencodedParser, function (req, res) {
     user.sport_name = req.body.sport_name;
     user_list.push(user);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.render('list_user',{"users":user_list}); 
+    res.render('list_user',{"page_title":"Registered Users","users":user_list}); 
 });
 var server = app.listen(8081, function () {
 var host = server.address().address,
