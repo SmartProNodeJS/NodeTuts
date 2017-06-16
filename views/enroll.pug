@@ -1,0 +1,27 @@
+extends main.pug
+block content
+      h1 Register Form
+      div(style={width:"60%",margin:"auto"})
+            form.form-horizontal(name="Enrollform",action="Enrolluser",method="POST")
+                  .form-group 
+                        label(for="firstname",class="col-sm-2 control-label") First name:    
+                        .col-sm-10
+                              input(name="firstname",class="form-control" id="inputEmail3" placeholder="First Name")
+                  .form-group 
+                        label(for="lastname",class="col-sm-2 control-label") Last name:    
+                        .col-sm-10
+                              input(name="lastname",class="form-control" id="lastname" placeholder="Last Name")
+                  .form-group 
+                        label(for="age",class="col-sm-2 control-label") Age:    
+                        .col-sm-10
+                              input(name="age",class="form-control" id="age" placeholder="Age") 
+                  .form-group 
+                        label(for="sport_id",class="col-sm-2 control-label") Sports:    
+                        .col-sm-10
+                              select(name="sport_name",class="form-control" id="sport_id")
+                                    each sp in sport_list
+                                          option(value=sp.name) #{sp.desc}
+                                    
+                  .form-group
+                        .col-sm-offset-2.col-sm-10
+                              button(type="submit" class="btn btn-success") Sign In
