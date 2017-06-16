@@ -1,0 +1,22 @@
+html
+    head
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    title Đăng ký thành viên
+        
+    body
+        img(src="http://www.dogbreedplus.com/dog_names/images/funny-dog-names.jpg")
+        h1 Danh sách thành viên đăng ký
+        table.table.table-striped
+            tr
+                th #
+                th First name
+                th Last name
+                th Age
+                th Sport name
+            each u,i in users
+                tr
+                    td #{i}
+                    td #{u.first_name}
+                    td #{u.last_name}
+                    td #{u.age}
+                    td #{u.sport_name}
