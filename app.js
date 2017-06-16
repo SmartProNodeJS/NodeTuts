@@ -30,7 +30,7 @@ app.post('/registerUser',urlencodedParser, function (req, res) {
     user.sport_name = req.body.sport_name;
     user_list.push(user);
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.render('list_user',{"page_title":"Registered Users","users":user_list}); 
+    res.render('list_user',{"page_title":"Danh Sach nguoi dung","users":user_list}); 
 });
 var server = app.listen(8081, function () {
 var host = server.address().address,
