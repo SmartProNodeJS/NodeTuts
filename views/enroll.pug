@@ -1,0 +1,31 @@
+html
+ head
+  title
+  link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+ body
+      div(style={width:"60%",margin:"auto"})
+            h1 Register Form
+            center
+                
+                form.form-horizontal(name="Enrollform",action="Enroll",method="POST")
+                    .form-group 
+                            label(for="firstname",class="col-sm-2 control-label") First name:    
+                            .col-sm-10
+                                input(name="firstname",class="form-control" id="inputEmail3" placeholder="FirstName")
+                    .form-group 
+                            label(for="lastname",class="col-sm-2 control-label") Last name:    
+                            .col-sm-10
+                                input(name="lastname",class="form-control" id="lastname" placeholder="LastName")
+                    .form-group 
+                            label(for="age",class="col-sm-2 control-label") Age:    
+                            .col-sm-10
+                                input(name="age",class="form-control" id="age" placeholder="Age") 
+                    .form-group 
+                            label(for="sport_id",class="col-sm-2 control-label") Sport:    
+                            .col-sm-10
+                                select(name="sport",class="form-control" id="sport_id") 
+                                    each sp  in sport_list
+                                        option(value=sp.name) #{sp.desc}                    
+                    .form-group
+                            .col-sm-offset-2.col-sm-10
+                                button(type="submit" class="btn btn-danger") Sign In

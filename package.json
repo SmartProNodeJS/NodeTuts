@@ -1,16 +1,35 @@
 {
+<<<<<<< HEAD
   "name": "chithanh",
   "version": "1.0.1",
   "description": "chuong trinh tu dong deploy",
   "main": "simpleserver.js",
   "scripts": {
+=======
+  "name": "test",
+  "version": "1.0.0",
+  "description": "this is my test package nha may cha may me",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "pug": "^2.0.0-rc.2",
+    "urldecode": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon app.js",
+>>>>>>> lehien
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SmartProNodeJS/NodeTuts.git"
   },
+<<<<<<< HEAD
   "author": "",
+=======
+  "author": "lehien",
+>>>>>>> lehien
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SmartProNodeJS/NodeTuts/issues"
