@@ -1,3 +1,42 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="">
+<head>
+    <title>HELLO</title>
+ <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <script type="text/javascript" src="js/client.js"></script>
+</head>
+<body>
+    <style>
+    .button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 10px;
+}
+    </style>
+    <center>
+    <img src="/img/giay.gif" style="border-radius: 550px;width:280px;">
+    <form name="testpost" method="post" action="/testpost">
+       First name :<input name="a1" type="text" value="" class="textbox" placeholder="Your first name" /><br/>
+         Last name :<input name="a2" type="text" value="" class="textbox" placeholder="Your last name" /><br/>
+       
+        <input type="submit" value="Post it" class="button"  />
+    </form>
+    </center>
+    <script>
+        
+window.onload = function() {
+   test();
+};
+          
+
+    
+
+    </script>
+</body>
+
+</html>

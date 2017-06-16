@@ -1,0 +1,27 @@
+body
+{
+
+    margin: 10px auto;
+    background-image: url("https://i.ytimg.com/vi/v1SabYdIlZI/maxresdefault.jpg");
+    background-size: cover;
+    font-family:Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+    color: maroon;
+
+}
+.textbox
+{
+
+    padding: 10px;
+    min-width: 500px;
+    background-color: #dadada;
+    border-radius: 15px;
+    border: 0px solid #dadada;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+center
+{
+
+    margin-top:20px;
+    
+}
