@@ -2,13 +2,14 @@ html
     head
         title=page_title
         script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+        script(src="/js/client.js")
         link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",rel="stylesheet")
         link(href="/css/main.css",rel="stylesheet")
     body
         .header
             block header
             h1 #{page_title}
-        .body-content
+        .body-content 
             block content
         footer
             p Posted by: Hege Refsnes

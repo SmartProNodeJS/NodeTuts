@@ -1,9 +1,5 @@
-html
-    head
-        link(rel="stylesheet",href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-        title Registered users
-    body
-        h1 Registered users
+extends main.pug
+block content
         table.table.table-bordered
             tr
                 th #
@@ -11,10 +7,17 @@ html
                 th Last Name
                 th Age
                 th Sport Name
-            each u, i in users
+                th Actions
+            if (users.length)
+                each u, i in users
+                    tr
+                        td #{i}
+                        td #{u.first_name}
+                        td #{u.last_name}
+                        td #{u.age}
+                        td #{u.sport_name}
+                        td 
+                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_user(this);") Remove
+            else
                 tr
-                    td #{i}
-                    td #{u.first_name}
-                    td #{u.last_name}
-                    td #{u.age}
-                    td #{u.sport_name}
+                    td(colspan=5) No users
