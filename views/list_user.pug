@@ -1,0 +1,23 @@
+html
+    head
+     title Register Users
+     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
+    body
+        h1 Register Users
+        table.table.table-striped.table-bordered
+            tr
+                th #
+                th First Name
+                th Last Name
+                th Age
+                th Spost Name
+            if users
+                each u,i in users
+                    tr 
+                        td.active #{i}
+                        td.success #{u.firstname}
+                        td.warning #{u.lastname}
+                        td.danger #{u.age}
+                        td.info #{u.sport_name}    
+            else
+                td No user
