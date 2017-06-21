@@ -11,6 +11,7 @@ html
                 th Last Name
                 th Age
                 th Spost Name
+<<<<<<< HEAD
             if users
                 each u,i in users
                     tr 
@@ -21,3 +22,13 @@ html
                         td.info #{u.sport_name}    
             else
                 td No user
+=======
+            each u,i in users
+                tr 
+                    td.active #{i}
+                    td.success #{u.firstname}
+                    td.warning #{u.lastname}
+                    td.danger #{u.age}
+                    td.info #{u.sport_name}    
+                    
+>>>>>>> 024300db000688dbe4be2d8ffd3e287af6703e10

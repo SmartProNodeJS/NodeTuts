@@ -4,7 +4,15 @@ var httpServer = http.createServer(function (request, response) {
     response.statusCode = 200;
     response.setHeader("Content-Type", "text/html");
 <<<<<<< HEAD
+<<<<<<< HEAD
     response.end("<html><title>Hello phtan</title><body><h1>Hello, World</h1></body></html>");
+=======
+    response.end("<html><title>Hello</title><body><h1>Hello, World</h1></body></html>");
+=======
+<<<<<<< HEAD
+    response.end("<html><title>Hello phtan</title><body><h1>Hello, World</h1></body></html>");
+>>>>>>> lehien
+>>>>>>> 024300db000688dbe4be2d8ffd3e287af6703e10
 }).listen(8080, function(){
     console.log("Server is listening on port 8080");
 <<<<<<< HEAD
