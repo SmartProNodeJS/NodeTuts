@@ -6,12 +6,23 @@ html
         link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",rel="stylesheet")
         link(href="/css/main.css",rel="stylesheet")
     body
-        .header
-            block header
-            h1 #{page_title}
-        .body-content 
-            block content
+        nav(class="navbar navbar-inverse navbar-fixed-top")
+            .container-fluid
+                .navbar-header
+                    a(class="navbar-brand", href="#") League management
+                .navbar-collapse.collapse
+        .container-fluid
+            .row
+                div(class="col-sm-3 col-md-2 sidebar")
+                    ul(class="nav nav-sidebar")
+                        li.active
+                            a(href="#") Leagues
+                                span.sr-only (current)        
+                        li
+                            a(href="/users/") Players
+                div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+                    block content
         footer
-            p Posted by: Hege Refsnes
+            p Copyright NodeJS class @ SmartPro 
             p Contact information
                 a(href="mailto:someone@example.com") someone@example.com

@@ -1,7 +1,6 @@
 var express = require('express');
 var route = express.Router();
 var bodyParser = require("body-parser");
-var user_list = [];
 
 var setUsers = function(req, res, next){
     req.users = user_list;
@@ -9,12 +8,12 @@ var setUsers = function(req, res, next){
 }
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-route.use(setUsers);
+// route.use(setUsers);
 route.get("/", function(req, res) {
-    if(!req.users){
-       req.users = [];
+    if(!req.session.users){
+       req.session.users = [];
     }
-    res.render('list_user',{"page_title":"Registered Users","users":req.users});
+    res.render('list_user',{"page_title":"Registered Users","users":req.session.users});
 });
 
 route.post('/',urlencodedParser, function (req, res) {
@@ -23,7 +22,9 @@ route.post('/',urlencodedParser, function (req, res) {
      user.last_name = req.body.last_name;
      user.age = req.body.age;
     user.sport_name = req.body.sport_name;
-    user_list.push(user);
+    if(!req.session.users)
+     req.session.users = [];
+    req.session.users.push(user);
     res.redirect("/users/"); 
 });
 

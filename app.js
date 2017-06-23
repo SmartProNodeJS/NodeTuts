@@ -4,14 +4,19 @@ var express = require('express');
 var userRoute = require('./routes/users.js');
 var app = express();
 var bodyParser = require("body-parser");
+var cookies = require("cookie-parser");
+var esession = require("express-session");
 var user_list = [];
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
+app.use(cookies());
+app.use(esession({secret:"abcdefgh"}));
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug");
 
 app.get('/', urlencodedParser, function (req, res) {
+    res.cookie("router_root","/",{expires: new Date(360000+ Date.now())});
     res.render("index",{username:req.query.un});
 });
 app.get('/reg', function (req, res) {
