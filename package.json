@@ -9,6 +9,8 @@
     "decode-html": "^1.0.2",
     "express": "^4.15.3",
     "express-session": "^1.15.3",
+    "mongodb": "^2.2.29",
+    "monk": "^6.0.1",
     "nodemon": "^1.11.0",
     "pug": "^2.0.0-rc.2",
     "urldecode": "^1.0.1"

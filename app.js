@@ -6,12 +6,18 @@ var app = express();
 var bodyParser = require("body-parser");
 var cookies = require("cookie-parser");
 var esession = require("express-session");
+var mongo = require('mongodb');
+var db = require('monk')('localhost:27017/lm');
 var user_list = [];
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
 app.use(cookies());
 app.use(esession({secret:"abcdefgh"}));
+app.use(function(req, res, next){
+  req.db = db;
+  next();
+});
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug");
 

@@ -2,30 +2,35 @@ var express = require('express');
 var route = express.Router();
 var bodyParser = require("body-parser");
 
-var setUsers = function(req, res, next){
-    req.users = user_list;
-    next();
-}
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-// route.use(setUsers);
 route.get("/", function(req, res) {
-    if(!req.session.users){
-       req.session.users = [];
-    }
-    res.render('list_user',{"page_title":"Registered Users","users":req.session.users});
+    var db = req.db;
+    var userCol = db.get("users");
+    userCol.find({},{}, function(err, users){
+      if(err) {
+          console.log(" Error: "+JSON.stringify(err));
+      }else{
+        res.render('list_user',{"page_title":"Registered Users","users":users});
+      }
+    });   
 });
 
 route.post('/',urlencodedParser, function (req, res) {
     var user = {};
     user.first_name = req.body.first_name;
-     user.last_name = req.body.last_name;
-     user.age = req.body.age;
+    user.last_name = req.body.last_name;
+    user.age = req.body.age;
     user.sport_name = req.body.sport_name;
-    if(!req.session.users)
-     req.session.users = [];
-    req.session.users.push(user);
-    res.redirect("/users/"); 
+    var db = req.db;
+    var users = db.get("users");
+    users.insert(user, function(err, added_user){
+      if(err) {
+          console.log(" Error: "+JSON.stringify(err));
+      }else{
+        res.redirect("/users/")
+      }
+    });
 });
 
 route.delete('/:last_name/:first_name',function (req, res){
