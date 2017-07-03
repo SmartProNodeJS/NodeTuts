@@ -131,3 +131,11 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+td button {
+  margin: 0px 4px;
+}
+
+.table-bordered {
+  margin-top: 10px; 
+}
