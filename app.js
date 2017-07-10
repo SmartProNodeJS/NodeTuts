@@ -122,6 +122,17 @@ app.get('/', urlencodedParser, function (request, res) {
 >>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
 }); 
 app.use("/player",playerRoute);
+
+var Sports = require('./models/sports');
+
+Sports.findAll().then(function(sports){
+    console.log("Sports: "+JSON.stringify(sports));
+});
+
+Sports.findByName("Football").then(function(sports){
+    console.log("Sports with name (Football): "+JSON.stringify(sports));
+});
+
 var sockets = [];
 
 var io = SocketIO(ioHttp);
