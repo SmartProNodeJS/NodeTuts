@@ -4,6 +4,7 @@ var http = require('http');
 var bodyParser = require("body-parser");
 var cookies = require("cookie-parser");
 <<<<<<< HEAD
+<<<<<<< HEAD
 var esession = require("express-session");
 var mongo = require('mongodb');
 var db = require('monk')('localhost:27017/lm');
@@ -27,6 +28,8 @@ io.on('connection', function(socket){
 
 
 =======
+=======
+>>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
 var Session = require('express-session');
 var Monk = require('monk');
 var SocketIO = require("socket.io");
@@ -54,6 +57,9 @@ app.use(function(request, res, next){
 var playerRoute = require('./routes/player.js');
 
 var ioHttp = http.Server(app);
+<<<<<<< HEAD
+>>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
+=======
 >>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -62,6 +68,7 @@ app.use(cookies());
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug"); 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 app.get('/', urlencodedParser, function (req, res) {
     res.cookie("router_root","/",{expires: new Date(360000+ Date.now())});
@@ -101,12 +108,17 @@ app.get('/reg', function (req, res) {
         sport_list.push({"name":last_name,"desc":first_name});
     res.render('register',{"page_title":"Register User","sport_list":sport_list});
 =======
+=======
+>>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
 app.get('/', urlencodedParser, function (request, res) {
   menu_items.forEach(function(it){
     console.log(it.name+" is "+it.active);
     it.active = (it.name=='home')?"active":"";
   });
     res.render("index",{"menu_items":menu_items});
+<<<<<<< HEAD
+>>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
+=======
 >>>>>>> 2b7f8dec1c36932af0cf480208d809f59da63374
 }); 
 app.use("/player",playerRoute);
