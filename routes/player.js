@@ -5,11 +5,7 @@ var menu_items = require('../models/main_menu');
 var ObjectID = require('mongodb').ObjectID;
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var sportcb = function(err, sport_list){
-           res.render('player',{"btn_caption":"Update", "page_title":"Edit Player","sport_list":sport_list,"player":players[0],"menu_items":menu_items});
-           res.end();
-         }
-         
+
 route.use(function(req, res, next){
   menu_items.forEach(function(it){
     console.log(it.name+" is "+it.active);
@@ -43,7 +39,10 @@ route.get('/:id',  function (req, res) {
        if(err){
           console.log(JSON.stringify(err));
        }else{
-         sports.find({},{}, sportcb);
+         sports.find({},{}, function(err, sport_list){
+           res.render('player',{"btn_caption":"Update", "page_title":"Edit Player","sport_list":sport_list,"player":players[0],"menu_items":menu_items});
+           res.end();
+         });
        }
       });
     }else{

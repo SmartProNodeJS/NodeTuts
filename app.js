@@ -10,28 +10,21 @@ var SocketIO = require("socket.io");
 var config = require('./config');
 var menu_items = require('./models/main_menu');
 var io = socketio(ioHttp);
-
-
 var db = Monk(config.db_url, function(err, db){
     if(err){
         console.log("Could not connect to database: "+db_url);
         process.exit(0);
     }
 });
-
 var app = express();
-
 app.use(Session({secret:"NodeJSSecret"}));
 // Middle ware to put db object to request
-
 app.use(function(request, res, next){
   if(!request.db)
     request.db = db;
   next();
 });
-
 var playerRoute = require('./routes/player.js');
-
 app.use("/player", playerRoute);
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -41,7 +34,10 @@ app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug"); 
 
 app.get('/', urlencodedParser, function (req, res) {
-    res.cookie("router_root","/",{expires: new Date(360000+ Date.now())});
+    menu_items.forEach(function(it){
+        console.log(it.name+" is "+it.active);
+        it.active = (it.name=='home')?"active":"";
+    });
     res.render("index",{"menu_items":menu_items});
 });
 
@@ -49,11 +45,15 @@ var Sports = require('./models/sports');
 
 Sports.findAll().then(function(sports){
     console.log("Sports: "+JSON.stringify(sports));
+}).catch(function(err){
+    console.log("Error: "+err);
 });
 
 Sports.findByName("Football").then(function(sports){
     console.log("Sports with name (Football): "+JSON.stringify(sports));
-});
+}).catch(function(err){
+    console.log("Error: "+err);
+}); 
 
 var ioHttp = http.Server(app);
 

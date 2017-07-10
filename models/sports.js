@@ -3,17 +3,19 @@ var Monk = require('monk');
 var DbConfig = require('../config');
 
 function findAll() {
+  console.log("Db URL: "+DbConfig.db_url);
   return new Promise(function(resolve, reject){
     Monk(DbConfig.db_url, function(err, dbConn){
       if(err){
-        reject(err);
+        reject("Could not connect to database: "+err);
       }else{
         var sports = dbConn.get('sports');
         sports.find({},{}, function(err, sport_list){
-          if(err) reject(err);
+          if(err) reject("Could not find sport: "+err);
           else resolve(sport_list);
+           dbConn.close();
         });
-        dbConn.close();
+       
       }
     });
   });
@@ -29,8 +31,9 @@ function findByName(name) {
         sports.find({"name":name},{}, function(err, sport_list){
           if(err) reject(err);
           else resolve(sport_list);
+          dbConn.close();
         });
-        dbConn.close();
+        
       }
     });
   });
