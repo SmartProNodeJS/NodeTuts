@@ -1,34 +1,30 @@
-html
+doctype html
+html(lang="en")
   head
     title=page_title
     script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="/socket.io/socket.io.js")
     script(src="/js/client.js")
-    link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",rel="stylesheet")
+    link(href="/css/bootstrap.min.css",rel="stylesheet")
+    link(href="/css/font-awesome-4.7.0/css/font-awesome.min.css",rel="stylesheet")
     link(href="/css/main.css",rel="stylesheet")
   body
-    nav(class="navbar navbar-inverse navbar-fixed-top")
-      .container-fluid
+    #wrapper
+      nav(class="navbar navbar-inverse navbar-fixed-top",role="navigation")
         .navbar-header
           a(class="navbar-brand", href="#") League management
-        .navbar-collapse.collapse
-    .container-fluid
-        .row
-              div(class="col-sm-3 col-md-2 sidebar")
-                ul(class="nav nav-sidebar")
-                  li.active
-                    a(href="/league") Leagues
-                      span.sr-only (current)        
-                  li
-                    a(href="/match/") Matches
-                  li
-                    a(href="/team/") Teams
-                  li
-                    a(href="/player/") Players
-                  li
-                    a(href="/about/") About
-              div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
-                block content
-    footer
-        p Copyright NodeJS class @ SmartPro 
-        p Contact information
-          a(href="mailto:someone@example.com") someone@example.com
+        ul(class="nav navbar-right top-nav")
+          li.dropdown
+            a(href="#",class="dropdown-toggle",data-toggle="dropdown")
+              i.fa.fa-envelope
+                b.caret
+        div(class="collapse navbar-collapse navbar-ex1-collapse")
+          ul(class="nav navbar-nav side-nav")
+            if menu_items
+              each item in menu_items
+                li(class=item.active)
+                  a(href=item.url)
+                    i(class="fa fa-fw "+item.icon) &nbsp;#{item.title}        
+      #page-wrapper
+        div(class="container-fluid")
+          block content

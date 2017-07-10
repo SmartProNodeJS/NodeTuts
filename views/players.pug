@@ -1,8 +1,8 @@
 extends main.pug
 block content
         h2(class="sub-header") Players
-        a(href="/player/add", class="btn btn-primary btn-lg active", role="button") Add New
-        table.table.table-bordered
+        a(href="/player/add", class="btn btn-primary active", role="button") Add New
+        table.table.table-bordered.table-hover
             tr
                 th #
                 th First Name
@@ -13,11 +13,14 @@ block content
             if (players.length)
                 each u, i in players
                     tr
-                        td #{i}
+                        td #{i+1}
                         td #{u.first_name}
                         td #{u.last_name}
                         td #{u.age}
-                        td #{u.sport_name}
+                        if u.sport
+                          td #{u.sport.desc}
+                        else 
+                          td #{u.sport_name}
                         td 
                             button(type="button", class="btn btn-danger btn-sm", onclick="delete_player('"+u._id+"');") Remove
                             a(href="/player/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
