@@ -6,5 +6,4 @@ var menu_items = [
                     {name:"player",title:"Player","url":"/player","icon":"fa-user-circle-o"}
                  ];
 
-
 module.exports = menu_items;
