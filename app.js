@@ -33,6 +33,7 @@ app.use(cookies());
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug"); 
 
+
 app.get('/', urlencodedParser, function (req, res) {
     menu_items.forEach(function(it){
         console.log(it.name+" is "+it.active);
