@@ -5,7 +5,7 @@ var cbfn = function(err, content) {
 };
 var txtContent = fs.readFileSync("sample.txt");
 console.log("File content: "+txtContent);
-console.log("Cont...Sync "); 
+console.log("Cont...Sync ");
 
 var readFileWithPromise = function(filename){
     return new Promise(function(resolve, reject){

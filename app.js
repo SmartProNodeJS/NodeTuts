@@ -33,7 +33,6 @@ app.use(cookies());
 app.set("views",path.join(__dirname,"views"));
 app.set("view engine","pug"); 
 
-
 app.get('/', urlencodedParser, function (req, res) {
     menu_items.forEach(function(it){
         console.log(it.name+" is "+it.active);
@@ -44,31 +43,17 @@ app.get('/', urlencodedParser, function (req, res) {
 
 var Sports = require('./models/sports');
 
-app.get('/sports',function(req, res) {
-    Sports.findAll().then(function(sports){
-    //console.log("Sports: "+JSON.stringify(sports));
-    res.status(200).json(sports);
-    }).catch(function(err){
-        console.log("Error: "+err);
-    });
-});
-app.get('/sport/:name',function(req, res) {
-    Sports.findByName(req.params.name).then(function(sports){
-        console.log("Sports with name (Football): "+JSON.stringify(sports));
-        res.status(200).json(sports[0]);
-    }).catch(function(err){
-        console.log("Error: "+err);
-    }); 
+Sports.findAll().then(function(sports){
+    console.log("Sports: "+JSON.stringify(sports));
+}).catch(function(err){
+    console.log("Error: "+err);
 });
 
-app.post('/sport',urlencodedParser, function(req, res) {
-    Sports.findByName(req.body.sport_name).then(function(sports){
-        console.log("Sports with name("+req.body.sport_name+"): "+JSON.stringify(sports));
-        res.status(200).json(sports[0]);
-    }).catch(function(err){
-        console.log("Error: "+err);
-    }); 
-});
+Sports.findByName("Football").then(function(sports){
+    console.log("Sports with name (Football): "+JSON.stringify(sports));
+}).catch(function(err){
+    console.log("Error: "+err);
+}); 
 
 var ioHttp = http.Server(app);
 
@@ -101,34 +86,8 @@ io.on("connection", function(socket){
     sockets.push({"user":"", "socket":socket});
 });
 
-var handle404Pages = function handle404(req, res, next){
-  console.log("Response Type: "+ req.accepts('html'));
-    menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
-        it.active = (it.name=='home')?"active":"";
-    });
-  res.status(404);
-  // respond with html page
-  if (req.accepts('html')) {
-    res.render('404', {"menu_items":menu_items, url: req.url });
-    return;
-  }
-
-  // respond with json
-  if (req.accepts('json')) {
-    res.send({ error: 'Not found' });
-    return;
-  }
-  // default to plain-text. send()
-  res.type('txt').send('Not found');    
-}
-
-app.use(handle404Pages);
-
 var server = ioHttp.listen(8081, function () {
     var host = server.address().address,
     port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
 })
-
-module.exports = app;

@@ -9,12 +9,6 @@
       "request": "launch",
       "name": "Launch Program",
       "program": "${workspaceRoot}\\app.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program Ex1",
-      "program": "${workspaceRoot}\\Ex1.js"
     }
   ]
 }

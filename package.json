@@ -5,8 +5,7 @@
   "main": "Ex1.js",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "chai": "^4.1.0",
-    "chai-http": "^3.0.0",
+    "chai": "^4.0.2",
     "cookie-parser": "^1.4.3",
     "decode-html": "^1.0.2",
     "express": "^4.15.3",
@@ -24,7 +23,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon app.js &",
+    "start": "nodemon app.js",
     "test": "mocha"
   },
   "repository": {
