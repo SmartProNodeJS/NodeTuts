@@ -8,7 +8,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 route.use(function(req, res, next){
   menu_items.forEach(function(it){
-    console.log(it.name+" is "+it.active);
+    //console.log(it.name+" is "+it.active);
     it.active = (it.name=='player')?"active":"";
 
   });
@@ -33,16 +33,17 @@ route.get('/:id',  function (req, res) {
     var sports = db.get("sports");
     var id = String(req.params.id);
     var idCheck = new RegExp("^[0-9a-fA-F]{24}$");
-  
+
     if(idCheck.test(id)) {
       players.find({"_id":id}, {}, function(err, players){
+        var sportcb = function(err, sport_list){
+           res.render('player',{"btn_caption":"Update", "page_title":"Edit Player","sport_list":sport_list,"player":players[0],"menu_items":menu_items});
+           res.end();
+        }
        if(err){
           console.log(JSON.stringify(err));
        }else{
-         sports.find({},{}, function(err, sport_list){
-           res.render('player',{"btn_caption":"Update", "page_title":"Edit Player","sport_list":sport_list,"player":players[0],"menu_items":menu_items});
-           res.end();
-         });
+         sports.find({},{}, sportcb);
        }
       });
     }else{

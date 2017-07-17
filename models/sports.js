@@ -1,6 +1,20 @@
 var Promise = require('promise');
 var Monk = require('monk');
 var DbConfig = require('../config');
+var sports = [{"name":"volleyball","desc":"Bong chuyen"},
+{"name":"swimming","desc":"Boi/Loi"},{"name":"table_tennis"
+,"desc":"Bong ban"},{"name":"Football","desc":"Bong da"}]
+function init(){
+  Monk(DbConfig.db_url, function(err, dbConn){
+        var sports = dbConn.get('sports');
+        sports.deleteMany({}, function(err, results){
+          console.log("Sports is now empty.");
+          sports.insert(sports, function(err, added){
+            console.log("Sports is now inserted.");
+          });
+        });
+  });
+}
 
 function findAll() {
   console.log("Db URL: "+DbConfig.db_url);
