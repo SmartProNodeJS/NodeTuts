@@ -26,6 +26,8 @@ app.use(function(request, res, next){
 });
 var playerRoute = require('./routes/player.js');
 app.use("/player", playerRoute);
+var teamRoute = require('./routes/team.js');
+app.use("/team", teamRoute);
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
