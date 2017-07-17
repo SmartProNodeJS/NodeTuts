@@ -25,7 +25,11 @@ app.use(function(request, res, next){
   next();
 });
 var playerRoute = require('./routes/player.js');
+var teamerRoute = require('./routes/teamer.js');
+
 app.use("/player", playerRoute);
+app.use("/teamer",teamerRoute);
+
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
