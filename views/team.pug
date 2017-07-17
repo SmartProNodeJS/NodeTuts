@@ -1,0 +1,27 @@
+extends main
+block content
+  h2(class="sub-header") Teams
+  table.table.table-bordered.table-hover
+    tr
+      th STT
+      th Team Name
+      th Players
+      th Actions
+    if (teams.length)
+      each t, i in teams
+        tr
+          td #{i+1}
+          td #{t.team_name}
+          td #{t.players}
+          if t.players.length
+            each p in t.players
+              td #{p.first_name} #{p.last_name}
+                br
+          else
+            td No players
+          td
+            button(id="btnEditTeam", type="button", class="btn btn-default btn-sm") Edit
+            button(id="btnRemoveTeam", type="button", class="btn btn-danger btn-sm") Remove
+    else
+      tr
+        td(colspan=4, class='text-center') No teams
