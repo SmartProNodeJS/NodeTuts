@@ -89,4 +89,16 @@ route.delete('/:id', function (req, res){
     });
 });
 
+route.get("/list_players/:sport_name", function(req, res) {
+    var db = req.db;
+    var userCol = db.get("players");
+    userCol.find({"sport.name":req.params.sport_name},{}, function(err, players){
+      if(err) {
+        console.log(" Error: "+JSON.stringify(err));
+      }else{
+        res.json(players);
+      }
+    });   
+});
+
 module.exports = route;

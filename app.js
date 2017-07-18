@@ -37,7 +37,7 @@ app.set("view engine","pug");
 
 app.get('/', urlencodedParser, function (req, res) {
     menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
+        //console.log(it.name+" is "+it.active);
         it.active = (it.name=='home')?"active":"";
     });
     res.render("index",{"menu_items":menu_items});

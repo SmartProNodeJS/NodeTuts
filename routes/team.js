@@ -60,35 +60,39 @@ route.get('/:id/:sport_name?',  function (req, res) {
     }
 }); 
 
-route.post('/',urlencodedParser,  function (req, res) {
+route.post('/', urlencodedParser,  function (req, res) {
     var db = req.db;
     var team = {};
     var obj_id = req.body.obj_id;
-    team.team_name = req.body.team_name;
-    team.number_player = req.body.number_player;
     var players = db.get("players");
 
     db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
-      team.sport = s[0];
-      if(req.body.team_player_list){
-        var temp_player_list = [];
-        req.body.team_player_list.forEach(function(it){
-          players.find({"_id":it}, {}, function(err, players_find){
-            console.log(JSON.stringify(players_find[0]));
-          });
-        });
-      }
-
       var teams = db.get("teams");
-      teams.update({"_id":obj_id},team,{upsert: true}, function(err, added_team){
+      teams.update({"_id":obj_id}, { $set: {"team_name": req.body.team_name, "number_player": req.body.number_player, "sport": s[0] }}, function(err, added_team){
         if(err) {
           console.log(" Error: "+JSON.stringify(err));
         }else{
-          res.redirect("/team/")
+          res.redirect("/team/");
         }
       });    
     });
-  
+});
+
+route.post('/addplayer', urlencodedParser, function (req, res){
+  var db = req.db;
+  var teamCol = db.get("teams");
+  var id = req.body.id;
+
+  if(JSON.parse(req.body.team_player_list)){
+    var data = JSON.parse(req.body.team_player_list);
+    data.forEach(function(it){
+      teamCol.update({ "_id": id},{ $push: {"player_list": it}});
+    });
+    res.json(true);
+  }
+  else{
+    res.json(false);
+  }
 });
 
 route.delete('/:id', function (req, res){
@@ -101,6 +105,20 @@ route.delete('/:id', function (req, res){
         res.json({status: true});
       } 
     });
+});
+
+route.delete('/deleteplayer/:id/:player_id', function (req, res){
+  var db = req.db;
+  var teamCol = db.get("teams");
+  var id = req.params.id;
+  var player_id = req.params.player_id;
+  teamCol.update({"_id":id}, { $pull: {"player_list": {"_id": player_id}}}, function(err, deleteplayer){
+    if(err) {
+      console.log(" Error: "+JSON.stringify(err));
+    }else{
+      res.json(true);
+    }
+  });
 });
 
 module.exports = route;
