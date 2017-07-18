@@ -2,6 +2,7 @@ var express = require('express');
 var route = express.Router();
 var bodyParser = require("body-parser");
 var menu_items = require('../models/main_menu');
+var players_model = require('../models/players');
 var ObjectID = require('mongodb').ObjectID;
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -27,27 +28,31 @@ route.get("/", function(req, res) {
     });   
 });
 
-route.get('/:id',  function (req, res) {
+route.get('/:id/:sport_name?',  function (req, res) {
     var db = req.db;
     var teams = db.get("teams");
     var sports = db.get("sports");
+    var players = db.get("players");
     var id = String(req.params.id);
+    var sport_name = String(req.params.sport_name);
     var idCheck = new RegExp("^[0-9a-fA-F]{24}$");
 
     if(idCheck.test(id)) {
       teams.find({"_id":id}, {}, function(err, teams){
-        var sportcb = function(err, sport_list){
-           res.render('teams',{"btn_caption":"Update", "page_title":"Edit Team","sport_list":sport_list,"team":teams[0],"menu_items":menu_items});
-           res.end();
-        }
-       if(err){
-          console.log(JSON.stringify(err));
-       }else{
-         sports.find({},{}, sportcb);
-       }
+        sports.find({},{},function(err, sport_list){
+          var playercb = function(err, player_list){     
+            res.render('team',{"btn_caption":"Update", "page_title":"Edit Team","sport_list":sport_list,"team":teams[0],"menu_items":menu_items,"player_list":player_list});
+            res.end();
+          }
+          if(err){
+              console.log(JSON.stringify(err));
+          }else{
+            players.find({"sport.name":sport_name},{}, playercb);
+          }
+        });         
       });
     }else{
-      var newteam = {"_id":new ObjectID(),"team_name":"","number_player":"","sport_name":""}
+      var newteam = {"_id":new ObjectID(),"team_name":"","number_player":"","sport":""}
          sports.find({},{}, function(err, sport_list){
            res.render('team',{"btn_caption":"Add new","page_title":"Add New Team","sport_list":sport_list,"team":newteam,"menu_items":menu_items});
            res.end();
@@ -56,14 +61,24 @@ route.get('/:id',  function (req, res) {
 }); 
 
 route.post('/',urlencodedParser,  function (req, res) {
-  console.log("Request.body = "+JSON.stringify(req.body));
     var db = req.db;
     var team = {};
     var obj_id = req.body.obj_id;
     team.team_name = req.body.team_name;
     team.number_player = req.body.number_player;
+    var players = db.get("players");
+
     db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
       team.sport = s[0];
+      if(req.body.team_player_list){
+        var temp_player_list = [];
+        req.body.team_player_list.forEach(function(it){
+          players.find({"_id":it}, {}, function(err, players_find){
+            console.log(JSON.stringify(players_find[0]));
+          });
+        });
+      }
+
       var teams = db.get("teams");
       teams.update({"_id":obj_id},team,{upsert: true}, function(err, added_team){
         if(err) {

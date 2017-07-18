@@ -105,7 +105,6 @@ io.on("connection", function(socket){
 var handle404Pages = function handle404(req, res, next){
   console.log("Response Type: "+ req.accepts('html'));
     menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
         it.active = (it.name=='home')?"active":"";
     });
   res.status(404);

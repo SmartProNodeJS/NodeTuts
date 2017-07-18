@@ -18,7 +18,17 @@ block content
                         select(name="sport_name",class="form-control", id="sport_id")
                           if sport_list
                             each sp in sport_list
-                              option(value=sp.name, selected="selected") #{sp.desc}
+                                if(sp.name == team.sport.name)
+                                    option(value=sp.name, selected) #{sp.desc}
+                                else
+                                    option(value=sp.name) #{sp.desc}  
+                if player_list
+                    .form-group
+                        label(for="team_player_list",class="col-sm-2 control-label") Players: 
+                        .col-sm-10
+                            select(name="team_player_list",class="form-control", multiple="multiple", id="team_player_list")
+                                each pl in player_list
+                                        option(value=pl._id) #{pl.first_name + " " + pl.last_name} 
                 .form-group
                     .col-sm-offset-2.col-sm-10
                         button(type="submit",class="btn btn-primary active") #{btn_caption}
