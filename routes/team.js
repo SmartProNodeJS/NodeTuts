@@ -2,6 +2,7 @@ var express = require('express');
 var route = express.Router();
 var bodyParser = require("body-parser");
 var menu_items = require('../models/main_menu');
+var player = require('../models/player');
 var ObjectID = require('mongodb').ObjectID;
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -17,8 +18,8 @@ route.use(function(req, res, next){
 
 route.get("/", function(req, res) {
     var db = req.db;
-    var userCol = db.get("teams");
-    userCol.find({},{}, function(err, teams){
+    var teamCol = db.get("teams");
+    teamCol.find({},{}, function(err, teams){
       if(err) {
         console.log(" Error: "+JSON.stringify(err));
       }else{
@@ -31,23 +32,24 @@ route.get('/:id',  function (req, res) {
     var db = req.db;
     var teams = db.get("teams");
     var sports = db.get("sports");
+    var players = db.get("players");
     var id = String(req.params.id);
     var idCheck = new RegExp("^[0-9a-fA-F]{24}$");
 
     if(idCheck.test(id)) {
       teams.find({"_id":id}, {}, function(err, teams){
         var sportcb = function(err, sport_list){
-           res.render('teams',{"btn_caption":"Update", "page_title":"Edit Team","sport_list":sport_list,"team":teams[0],"menu_items":menu_items});
-           res.end();
+            res.render('team',{"btn_caption":"Update", "page_title":"Edit Team","sport_list":sport_list,"team":teams[0],"players":players,"menu_items":menu_items});
+            res.end();
         }
        if(err){
           console.log(JSON.stringify(err));
        }else{
-         sports.find({},{}, sportcb);
+         players.find({"sport_name":teams.sport.name},{}, sportcb);
        }
       });
     }else{
-      var newteam = {"_id":new ObjectID(),"team_name":"","number_player":"","sport_name":""}
+      var newteam = {"_id":new ObjectID(),"team_name":"","number_player":"","sport":""}
          sports.find({},{}, function(err, sport_list){
            res.render('team',{"btn_caption":"Add new","page_title":"Add New Team","sport_list":sport_list,"team":newteam,"menu_items":menu_items});
            res.end();
