@@ -2,37 +2,24 @@ extends main.pug
 block content
         h2(class="sub-header") Players
         div(style={width: "60%"})
-            form.form-horizontal(name="registerForm", action="/player/", method="POST")
+            form.form-horizontal(name="registerForm", action="/users/", method="POST")
                 .form-group
                     label(for="f_name",class="col-sm-2 control-label") First Name: 
                     .col-sm-10
-                      input(name="_id",type="hidden", id="_id", value=player._id )
-                      if player.first_name
-                        input(name="first_name",type="text", class="form-control", id="f_name", placeholder="First Name" value=player.first_name)
-                      else
-                        input(name="first_name",type="text", class="form-control", id="f_name", placeholder="First Name" value="")
+                        input(name="first_name",type="text", class="form-control", id="f_name", placeholder="First Name")
                 .form-group
                     label(for="l_name",class="col-sm-2 control-label") Last Name: 
                     .col-sm-10
-                      if player.last_name
-                        input(name="last_name",type="text", class="form-control", id="l_name", placeholder="Last Name", value=player.last_name)
-                      else
                         input(name="last_name",type="text", class="form-control", id="l_name", placeholder="Last Name")
                 .form-group
                     label(for="age_id",class="col-sm-2 control-label") Age: 
                     .col-sm-10
-                      if player.age
-                        input(name="age",type="text", class="form-control", id="age_id", placeholder="Age", value=player.age)
-                      else
                         input(name="age",type="text", class="form-control", id="age_id", placeholder="Age")
                 .form-group
                     label(for="sport_id",class="col-sm-2 control-label") Sports: 
                     .col-sm-10
                         select(name="sport_name",class="form-control", id="sport_id")    
-                            each sp in sport_list
-                              if player.sport_name && (player.sport_name == sp.name)
-                                option(value=sp.name, selected="selected") #{sp.desc}
-                              else
+                            each sp in sport_list 
                                 option(value=sp.name) #{sp.desc}
                 .form-group
                     .col-sm-offset-2.col-sm-10

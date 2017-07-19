@@ -1,0 +1,59 @@
+extends main.pug
+block content
+        h2(class="sub-header") Leagues
+        table.table.table-bordered
+            tr
+                th(style='display:none;') _id 
+                th Name
+                th Start
+                th End
+                th Place
+                th Sport
+                th Is_double
+            if (leagues.length)
+                each u, i in leagues
+                    tr
+                        td(style='display:none;') #{u._id} 
+                        td #{u.name}
+                        td #{u.start}
+                        td #{u.end}
+                        td #{u.place}
+                        td #{u.sport}
+                        td #{u.is_double}
+            else
+                tr
+                    td(colspan=5) No leagues
+        
+        h2(class="sub-header") Teams    
+        table.table.table-bordered
+            tr
+                th #
+                th Name
+            if (teams.length)
+                each u, i in teams
+                    tr
+                        td #{i}
+                        td #{u.name}
+            else
+                tr
+                    td(colspan=5) No Teams
+
+        h2(class="sub-header") Players
+        table.table.table-bordered
+            tr
+                th #
+                th First Name
+                th Last Name
+                th Age
+                th Sport Name
+            if (players.length)
+                each u, i in players
+                    tr
+                        td #{i}
+                        td #{u.first_name}
+                        td #{u.last_name}
+                        td #{u.age}
+                        td #{u.sport_name}
+            else
+                tr
+                    td(colspan=5) No Players

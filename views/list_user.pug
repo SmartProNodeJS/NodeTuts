@@ -1,7 +1,7 @@
 extends main.pug
 block content
         h2(class="sub-header") Players
-        a(href="/player/add", class="btn btn-primary btn-lg active", role="button") Add New
+        a(href="/reg", class="btn btn-primary btn-lg active", role="button") Add
         table.table.table-bordered
             tr
                 th #
@@ -9,18 +9,20 @@ block content
                 th Last Name
                 th Age
                 th Sport Name
-                th Actions
-            if (players.length)
-                each u, i in players
+                th Edit
+                th Remove
+            if (users.length)
+                each u, i in users
                     tr
                         td #{i}
                         td #{u.first_name}
                         td #{u.last_name}
                         td #{u.age}
                         td #{u.sport_name}
+                        td  
+                            button(type="button", class="btn btn-warning btn-sm", onclick="edit_user(this);") Edit
                         td 
-                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_player('"+u._id+"');") Remove
-                            a(href="/player/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
+                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_user(this);") Remove
             else
                 tr
-                    td(colspan=5) No Players
+                    td(colspan=5) No users

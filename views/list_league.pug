@@ -1,0 +1,33 @@
+extends main.pug
+block content
+        h2(class="sub-header") Leagues
+        a(href="/leagues/regLeague", class="btn btn-primary btn-lg active", role="button") Add
+        table.table.table-bordered
+            tr
+                th(style='display:none;') _id 
+                th Name
+                th Start
+                th End
+                th Place
+                th Sport
+                th Is_double
+                th Edit
+                th Remove
+            if (leagues.length)
+                each u, i in leagues
+                    tr
+                        td(style='display:none;') #{u._id} 
+                        td #{u.name}
+                        td #{u.start}
+                        td #{u.end}
+                        td #{u.place}
+                        td #{u.sport}
+                        td #{u.is_double}
+                        td  
+                            //a(href="/League?" + u.name, class="btn btn-warning btn-sm", role="button") Edit
+                            button(type="button", class="btn btn-warning btn-sm", onclick="edit_league(this);") Edit
+                        td 
+                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_league(this);") Remove
+            else
+                tr
+                    td(colspan=5) No leagues

@@ -1,23 +1,11 @@
 var fs = require("fs");
-var Promise = require('promise');
-
-var cbfn = function(err, content) {
+var cbfn = function(err, content){
+    console.log("File content: "+content);
 };
 var txtContent = fs.readFileSync("sample.txt");
-console.log("File content: "+txtContent);
-console.log("Cont...Sync "); 
+console.log("File content: " + txtContent);
+console.log("Cont ... Sync");
 
-var readFileWithPromise = function(filename){
-    return new Promise(function(resolve, reject){
-        fs.readFile(filename, function(err, content){
-            if(err) reject(err);
-            else resolve(String(content));
-        });
-    });
-}
+fs.readFile("sample.txt",cbfn);
 
-readFileWithPromise("sample.txt").then(function(content){
-    console.log("In Promise func: "+content);
-}).catch(function(err){
-    console.log(err);
-});
+console.log("Cont .... Async");

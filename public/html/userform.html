@@ -1,0 +1,21 @@
+<html>
+ <head>
+     <link rel="stylesheet" href="/css/userform.css" />
+     <script type="text/javascript" src="/js/client.js"></script>
+     </head>   
+<body>
+    <img src="/img/pic1.jpg" width="400px" />
+    <form name="testpost" method="POST" action="/testpost">
+    User Name: <input name="username" type="text" value="dạ , để em thử lại ạ. cảm ơn thầy" class="user-input" /><br />
+     First Name: <input name="f_name" type="text" value="" class="user-input" /><br />
+      Last Name: <input name="l_name" type="text" value="" class="user-input" /> <br />
+        <input type="submit" value="Submit to server" />
+    </form>
+</body>
+<script type="text/javascript">
+    window.onload = function(e){ 
+        console.log("Document ready...");
+        test_client_js();
+    }
+</script>
+</html>

@@ -1,13 +1,64 @@
+//- html
+//-   head
+//-     title=page_title
+//-     //- script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+//-     script(src="/js/jquery.min.js")
+//-     script(src="/js/kendo.all.min.js")
+//-     link(href="/js/kendo.common.min.css",rel="stylesheet")
+//-     link(href="/js/kendo.blueopal.min.css",rel="stylesheet")
+
+//-     script(src="/js/client.js")
+//-     script(src="/js/teamjs.js")
+//-     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css",rel="stylesheet")
+//-     link(href="/css/main.css",rel="stylesheet")
+//-   body
+//-     nav(class="navbar navbar-inverse navbar-fixed-top")
+//-       .container-fluid
+//-         .navbar-header
+//-           a(class="navbar-brand", href="#") League management
+//-         .navbar-collapse.collapse
+//-     .container-fluid
+//-         .row
+//-               div(class="col-sm-3 col-md-2 sidebar")
+//-                 ul(class="nav nav-sidebar")
+//-                   li.active
+//-                     a(href="/leagues/") Leagues
+//-                       span.sr-only (current)  
+//-                   li
+//-                     a(href="/match/") Matches
+//-                   li
+//-                     a(href="/team/") Teams
+//-                   li
+//-                     a(href="/player/") Players
+//-                   li
+//-                     a(href="/about/") About      
+//-                   li
+//-                     a(href="/users/") User test
+//-               div(class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main")
+//-                 block content
+//-     footer
+//-         p Copyright NodeJS class @ SmartPro 
+//-         p Contact information
+//-           a(href="mailto:someone@example.com") someone@example.com
+
 doctype html
 html(lang="en")
   head
     title=page_title
     script(src="https://code.jquery.com/jquery-3.2.1.min.js")
     script(src="/socket.io/socket.io.js")
-    script(src="/js/client.js")
     link(href="/css/bootstrap.min.css",rel="stylesheet")
     link(href="/css/font-awesome-4.7.0/css/font-awesome.min.css",rel="stylesheet")
     link(href="/css/main.css",rel="stylesheet")
+
+    script(src="/js/jquery.min.js")
+    script(src="/js/kendo.all.min.js")
+    link(href="/js/kendo.common.min.css",rel="stylesheet")
+    link(href="/js/kendo.blueopal.min.css",rel="stylesheet")
+
+    script(src="/js/client.js")
+    script(src="/js/teamjs.js")
+
   body
     #wrapper
       nav(class="navbar navbar-inverse navbar-fixed-top",role="navigation")

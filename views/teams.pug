@@ -1,0 +1,20 @@
+extends main.pug
+block content
+        h2(class="sub-header") Teams
+        a(href="/team/add", class="btn btn-primary btn-lg active", role="button") Add New
+        table.table.table-bordered
+            tr
+                th #
+                th Name
+                th Actions
+            if (teams.length)
+                each u, i in teams
+                    tr
+                        td #{i}
+                        td #{u.name}
+                        td 
+                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_team('"+u._id+"');") Remove
+                            a(href="/team/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
+            else
+                tr
+                    td(colspan=5) No Teams

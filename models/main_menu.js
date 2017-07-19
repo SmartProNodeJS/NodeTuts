@@ -1,5 +1,5 @@
 var menu_items = [
-                    {name:"home",title:"Home","url":"/","icon":"fa-home"},
+                    {name:"home",title:"Home","url":"/home","icon":"fa-home"},
                     {name:"league",title:"League","url":"/league","icon":"fa-ioxhost"},
                     {name:"match",title:"Match","url":"/match","icon":"fa-television"},
                     {name:"team",title:"Team","url":"/team","icon":"fa-address-card"},

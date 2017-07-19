@@ -1,0 +1,33 @@
+extends main.pug
+block content
+        h2(class="sub-header") #{page_title}
+        div(style={width: "60%"})
+            form.form-horizontal(name="editLeague", action="/leagues/", method="POST")
+                .form-group
+                    label(for="name",class="col-sm-2 control-label") Name: 
+                    .col-sm-10
+                        input(name="_id",type="hidden", id="_id", value=league._id )
+                        input(name="name",type="text", class="form-control", id="name", value=league.name )
+                .form-group
+                    label(for="start",class="col-sm-2 control-label") Start: 
+                    .col-sm-10
+                        input(name="start",type="text", class="form-control", id="start", placeholder="Start" , value = league.start)
+                .form-group
+                    label(for="end",class="col-sm-2 control-label") End: 
+                    .col-sm-10
+                        input(name="end",type="text", class="form-control", id="end", placeholder="End",value = league.end)
+                .form-group
+                    label(for="place",class="col-sm-2 control-label") Place: 
+                    .col-sm-10
+                        input(name="place",type="text", class="form-control", id="place", placeholder="Place",value = league.place)
+                .form-group
+                    label(for="sport",class="col-sm-2 control-label") Sports: 
+                    .col-sm-10
+                        input(name="sport",type="text", class="form-control", id="sport", placeholder="Sport",value = league.sport)
+                .form-group
+                    label(for="is_double",class="col-sm-2 control-label") Is_double: 
+                    .col-sm-10
+                        input(name="is_double",type="text", class="form-control", id="is_double", placeholder="Is double?",value = league.is_double)
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-default") Confirm
