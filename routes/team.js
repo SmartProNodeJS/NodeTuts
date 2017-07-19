@@ -41,7 +41,7 @@ route.get('/:id/:sport_name?',  function (req, res) {
       teams.find({"_id":id}, {}, function(err, teams){
         sports.find({},{},function(err, sport_list){
           var playercb = function(err, player_list){     
-            res.render('team',{"btn_caption":"Update", "page_title":"Edit Team","sport_list":sport_list,"team":teams[0],"menu_items":menu_items,"player_list":player_list});
+            res.render('team',{"btn_caption":"Update", "page_title":"Edit Team","sport_list":sport_list,"team":teams[0],"menu_items":menu_items,"player_list":player_list,"url_action":"/team/update"});
             res.end();
           }
           if(err){
@@ -51,16 +51,37 @@ route.get('/:id/:sport_name?',  function (req, res) {
           }
         });         
       });
-    }else{
+    }else if(id == "add"){
       var newteam = {"_id":new ObjectID(),"team_name":"","number_player":"","sport":""}
          sports.find({},{}, function(err, sport_list){
-           res.render('team',{"btn_caption":"Add new","page_title":"Add New Team","sport_list":sport_list,"team":newteam,"menu_items":menu_items});
+           res.render('team',{"btn_caption":"Add new","page_title":"Add New Team","sport_list":sport_list,"team":newteam,"menu_items":menu_items,"url_action":"/team/insert"});
            res.end();
          });
     }
 }); 
 
-route.post('/', urlencodedParser,  function (req, res) {
+route.post('/insert', urlencodedParser,  function (req, res) {
+    var db = req.db;
+    var team = {};
+    var obj_id = req.body.obj_id;
+    var players = db.get("players");
+    team.team_name = req.body.team_name;
+    team.number_player = req.body.number_player;
+
+    db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
+      team.sport = s[0];
+      var teams = db.get("teams");
+       teams.update({"_id":obj_id},team,{upsert: true}, function(err, added_team){
+        if(err) {
+          console.log(" Error: "+JSON.stringify(err));
+        }else{
+          res.redirect("/team/")
+        }
+      });    
+    });
+});
+
+route.post('/update', urlencodedParser,  function (req, res) {
     var db = req.db;
     var team = {};
     var obj_id = req.body.obj_id;

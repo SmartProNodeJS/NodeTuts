@@ -54,7 +54,7 @@ function edit_team(_id){
 function onchangeSport(){
   $.ajax({
     method: "GET",
-    url: "/player/list_players/"+$('#sport_id').val(),
+    url: "/category/team_list_players/"+$('#sport_id').val(),
     success: function(data) {
       $('#team_player_list').empty();
       $.each(data, function(index, value){

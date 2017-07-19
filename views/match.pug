@@ -1,0 +1,78 @@
+extends main.pug
+block content
+        h2(class="sub-header") Matches
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerMatchForm", action=url_action, method="POST")
+                input(name="obj_id",id="obj_id",type="hidden", value=match._id)
+                .form-group
+                    label(for="sport_id",class="col-sm-2 control-label") Sports: 
+                    .col-sm-10
+                        select(name="sport_name",class="form-control", id="sport_id", onchange="onchangeSport_Match()")
+                          if sport_list
+                            each sp in sport_list
+                                if(sp.name == match.sport.name)
+                                    option(value=sp.name, selected) #{sp.desc}
+                                else
+                                    option(value=sp.name) #{sp.desc} 
+                .form-group
+                    label(for="match_date",class="col-sm-2 control-label") Match Date: 
+                    .col-sm-10
+                      input(name="match_date",type="text", class="form-control", id="match_date", placeholder="Match Date" value=match.match_date)
+                .form-group
+                    label(for="match_time",class="col-sm-2 control-label") Match Time: 
+                    .col-sm-10
+                      input(name="match_time",type="text", class="form-control", id="match_time", placeholder="Match Time", value=match.match_time)
+                .form-group
+                    label(for="match_type",class="col-sm-2 control-label") Match Type: 
+                    .col-sm-10
+                        select(name="match_type",class="form-control", id="match_type")
+                          if match_type_list
+                            each tpl in match_type_list
+                                if(tpl.name == match.match_type.name)
+                                    option(value=tpl.name, selected) #{tpl.desc}
+                                else
+                                    option(value=tpl.name) #{tpl.desc}
+                .form-group
+                    label(for="match_status",class="col-sm-2 control-label") Match Status: 
+                    .col-sm-10
+                        select(name="match_status",class="form-control", id="match_status")
+                          if match_status_list
+                            each msl in match_status_list
+                                if(msl.name == match.match_status.name)
+                                    option(value=msl.name, selected) #{msl.desc}
+                                else
+                                    option(value=msl.name) #{msl.desc}        
+                .form-group
+                    label(for="match_score",class="col-sm-2 control-label") Match Score: 
+                    .col-sm-10
+                      input(name="match_score",type="text", class="form-control", id="match_score", placeholder="Match Score", value=match.match_score)            
+                if team_list
+                    .form-group
+                        label(for="match_team_list",class="col-sm-2 control-label") Teams: 
+                        .col-sm-10
+                            select(name="match_team_list",class="form-control", multiple="multiple", id="match_team_list")
+                                each tl in team_list
+                                    option(value=tl) #{tl.team_name}
+                    .form-group
+                        button(type="button", class="btn btn-success btn-sm", onclick="add_team();") Add Teams
+                .form-group
+                    div(id="matchTeam")
+                         table.table.table-bordered.table-hover
+                            tr
+                                th #
+                                th Team Name
+                                th Actions
+                            if (match.team_list)
+                                each u, i in match.team_list
+                                    tr
+                                        td #{i+1}
+                                        td #{u.team_name}
+                                        td 
+                                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_match_team('"+u._id+"');") Remove
+                            else
+                                tr
+                                    td(colspan=4) No Teams                      
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/match/", class="btn btn-default", role="button") Cancel

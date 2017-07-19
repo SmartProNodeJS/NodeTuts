@@ -2,7 +2,7 @@ extends main.pug
 block content
         h2(class="sub-header") Teams
         div(style={width: "60%"})
-            form.form-horizontal(name="registerForm", action="/team/", method="POST")
+            form.form-horizontal(name="registerForm", action=url_action, method="POST")
                 input(name="obj_id",id="obj_id",type="hidden", value=team._id)
                 .form-group
                     label(for="team_name",class="col-sm-2 control-label") Team Name: 
