@@ -6,22 +6,22 @@ block content
             tr
                 th #
                 th Team Name
-                th Number of Team
+                th Number of player
                 th Sport Name
                 th Actions
             if (teams.length)
                 each u, i in teams
                     tr
                         td #{i+1}
-                        td #{u.t_name}
-                        td #{u.t_number}
+                        td #{u.team_name}
+                        td #{u.number_player}
                         if u.sport
                           td #{u.sport.desc}
                         else 
                           td #{u.sport_name}
                         td 
                             button(type="button", class="btn btn-danger btn-sm", onclick="delete_team('"+u._id+"');") Remove
-                            a(href="/team/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
+                            a(href="/team/"+u._id+"/"+u.sport.name, class="btn btn-primary btn-sm active", role="button") Edit
             else
                 tr
                     td(colspan=5) No Teams
