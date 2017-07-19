@@ -1,16 +1,16 @@
 extends main.pug
 block content
-        h2(class="sub-header") Register Teams
+        h2(class="sub-header") Show Teams
         div(style={width: "60%"})
-            form.form-horizontal(name="registerForm", action="/team/", method="POST")
+            form.form-horizontal(name="ShowForm", action="/team/", method="POST")
                 .form-group
                     label(for="name",class="col-sm-2 control-label") Name: 
                     .col-sm-10
                       if team.name
-                        input(name="name",type="text", class="form-control", id="name", placeholder="Name" value=team.name)
+                        input(name="name",type="text", class="form-control", id="name", placeholder="Name" value=team.name readonly)
                         input(name="_id",type="hidden", id="_id", value=team._id )
                       else
-                        input(name="name",type="text", class="form-control", id="name", placeholder="Name" value="")
+                        input(name="name",type="text", class="form-control", id="name", placeholder="Name" value="" readonly)
                         input(name="_id",type="hidden", id="_id", value=0 )
                 .form-group
                     label(for="Leader",class="col-sm-2 control-label") Leader: 
@@ -18,16 +18,16 @@ block content
                       select(name="Leader",class="form-control", id="Leader")    
                             each sp in player_list
                               if team.Leader && (team.Leader == sp._id)
-                                option(value=sp._id, selected="selected") #{sp.first_name + ' ' + sp.last_name}
+                                option(value=sp._id, selected="selected", disabled="disabled") #{sp.first_name + ' ' + sp.last_name}
                               else
-                                option(value=sp._id) #{sp.first_name + ' ' + sp.last_name}
+                                option(value=sp._id, disabled="disabled") #{sp.first_name + ' ' + sp.last_name}
                 .form-group
                     label(for="AddPlayer",class="col-sm-2 control-label") Add Player: 
                     .col-sm-10
                       select(name="AddPlayer",class="form-control", id="AddPlayer")    
                             each sp in player_list2
-                              option(value=sp._id) #{sp.first_name + ' ' + sp.last_name}
-                      button#btnOpr.btn.btn-sm.btn-info(type='button', onclick='AddTeamToList()') Add   
+                              option(value=sp._id, disabled="disabled") #{sp.first_name + ' ' + sp.last_name}
+                      
                 .form-group
                     label(for="team_list",class="col-sm-2 control-label") List Player: 
                     .col-sm-10

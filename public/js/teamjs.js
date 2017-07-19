@@ -49,7 +49,7 @@ function onLoadGridPlayer() {
             headerAttributes: {
                 style: "text-align: center; vertical-align: middle; font-weight:bold;",
             },
-            //hidden:true,
+            hidden:true,
         },
         {
             field: "HOTEN",
@@ -89,8 +89,8 @@ function onLoadGridPlayer() {
     // grid.hideColumn("HANSUDUNG");
 }
 function AddTeamToList(){
-    var value = $("#AddTeam").val();
-    var text = $("option:selected",$("#AddTeam")).text(); 
+    var value = $("#AddPlayer").val();
+    var text = $("option:selected",$("#AddPlayer")).text(); 
     var grid_data = $("#team_list").data("kendoGrid").dataSource;
     grid_data.add({ _id: value, HOTEN: text});
 }

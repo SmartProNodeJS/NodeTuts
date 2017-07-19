@@ -68,6 +68,18 @@ function delete_player(_id){
     }
   });
 }
+function delete_team(_id){
+  $.ajax({
+    method: "DELETE",
+    url: "/team/"+_id,
+    success: function( msg ) {
+      location.href="/team/";
+    },
+    error: function( msg ) {
+      alert( "Error - " + msg.msgText );
+    }
+  });
+}
 
 function edit_player(_id){
   $.ajax({

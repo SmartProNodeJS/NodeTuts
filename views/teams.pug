@@ -13,8 +13,10 @@ block content
                         td #{i}
                         td #{u.name}
                         td 
+                            a(href="/team/ShowTeam/"+u._id, class="btn btn-primary btn-sm active", role="button") ShowTeam
                             button(type="button", class="btn btn-danger btn-sm", onclick="delete_team('"+u._id+"');") Remove
                             a(href="/team/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
+                            
             else
                 tr
                     td(colspan=5) No Teams
