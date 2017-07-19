@@ -30,7 +30,6 @@ route.get("/", function(req, res) {
 
 route.get('/:id',  function (req, res) {
     var db = req.db;
-    var match = {};
     var leagues = db.get("leagues");
     var sports = db.get("sports");
     var id = String(req.params.id);
@@ -85,8 +84,6 @@ route.post('/addmatch', urlencodedParser, function (req, res){
   var db = req.db;
   var leagueCol = db.get("leagues");
   var matchCol = db.get("matchs");
-  leagueCol.match_date = req.body.match_date;
-  leagueCol.match_time = req.body.match_time;
   var id = req.body.id;
   if(JSON.parse(req.body.league_match_list)){
     var data = JSON.parse(req.body.league_match_list);
