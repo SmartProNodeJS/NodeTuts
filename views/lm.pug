@@ -1,0 +1,30 @@
+extends main.pug
+block content
+        h2(class="sub-header") Leagues
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action="/users/", method="POST")
+                .form-group
+                    label(for="lm_name",class="col-sm-2 control-label") Leagues Name: 
+                    .col-sm-10
+                        input(name="Leagues_name",type="text", class="form-control", id="lm_name", placeholder="Leagues Name")
+                .form-group
+                    label(for="s_date",class="col-sm-2 control-label") Start date: 
+                    .col-sm-10
+                        input(name="start_date",type="text", class="form-control", id="s_date", placeholder="Start date")
+                .form-group
+                    label(for="e_date",class="col-sm-2 control-label") End date: 
+                    .col-sm-10
+                        input(name="end_date",type="text", class="form-control", id="e_date", placeholder="End date")
+                .form-group
+                    label(for="Bonus",class="col-sm-2 control-label") Bonus: 
+                    .col-sm-10
+                        input(name="Bonus",type="text", class="form-control", id="Bonus", placeholder="Bonus")
+                .form-group
+                    label(for="statistical_id",class="col-sm-2 control-label") Statistical: 
+                    .col-sm-10
+                        select(name="statistical_name",class="form-control", id="statistical_id")    
+                            each sp in statistical_list
+                                option(value=sp.name) #{sp.desc}
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-default") Sign in

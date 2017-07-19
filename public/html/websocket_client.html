@@ -1,0 +1,41 @@
+<html>
+ <head>
+     <link rel="stylesheet" href="/css/userform.css" />
+     <script type="text/javascript" src="/js/client.js"></script>
+     </head>   
+<body>
+    <form name="testpost" method="POST" action="/testpost">
+    User Name: <input id="username" type="text" value="dạ , để em thử lại ạ. cảm ơn thầy" class="user-input" /><br />
+     First Name: <input name="f_name" type="text" value="" class="user-input" /><br />
+      Last Name: <input name="l_name" type="text" value="" class="user-input" /> <br />
+        <input type="submit" value="Submit to server" />
+    </form>
+</body>
+<script type="text/javascript">
+    window.onload = function(e){ 
+        var inputCtrl = document.getElementById('username');
+        window.WebSocket = window.WebSocket || window.MozWebSocket;
+        if(!window.WebSocket){
+            alert('Sorry, em rat dep...');
+        }else{
+            var connection = new WebSocket('ws://localhost:8080');
+            inputCtrl.addEventListener('change', function(e){
+                alert(this.value);
+                connection.send(this.value);
+            });
+
+            connection.onopen = function(){
+                console.log('Connection is opened');
+            };
+            connection.onerror = function(err){
+                console.log('Connection error: '+err);
+            };
+
+            connection.onmessage =function(msg){
+                var msgdata = JSON.parse(msg.data);
+                console.log(msgdata.text);
+            }
+        }
+    }
+</script>
+</html>

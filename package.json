@@ -1,51 +1,42 @@
-<<<<<<< HEAD
-=======
 {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 871c0bdebba29029a861f7393d3cbc7dee8540af
-  "name": "chithanh",
-  "version": "1.0.1",
-  "description": "chuong trinh tu dong deploy",
-  "main": "simpleserver.js",
-  "scripts": {
-<<<<<<< HEAD
-=======
-=======
-  "name": "test",
+  "name": "tuts",
   "version": "1.0.0",
-  "description": "this is my test package nha may cha may me",
-  "main": "app.js",
+  "description": "Node tutorials",
+  "main": "Ex1.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "bootstrap-multiselect": "^0.9.13-1",
+    "chai": "^4.1.0",
+    "chai-http": "^3.0.0",
+    "cookie-parser": "^1.4.3",
+    "decode-html": "^1.0.2",
     "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "mocha": "^3.4.2",
+    "mongo": "^0.1.0",
+    "mongodb": "^2.2.30",
+    "monk": "^6.0.1",
+    "nodemon": "^1.11.0",
+    "promise": "^8.0.0",
     "pug": "^2.0.0-rc.2",
-    "urldecode": "^1.0.1"
+    "request": "^2.81.0",
+    "socket.io": "^2.0.3",
+    "urldecode": "^1.0.1",
+    "websocket": "^1.0.24"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "nodemon app.js",
->>>>>>> lehien
->>>>>>> 871c0bdebba29029a861f7393d3cbc7dee8540af
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js &",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SmartProNodeJS/NodeTuts.git"
   },
-<<<<<<< HEAD
-  "author": "",
-=======
-<<<<<<< HEAD
-  "author": "",
-=======
-  "author": "lehien",
->>>>>>> lehien
->>>>>>> 871c0bdebba29029a861f7393d3cbc7dee8540af
+  "author": "abc",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/SmartProNodeJS/NodeTuts/issues"
   },
   "homepage": "https://github.com/SmartProNodeJS/NodeTuts#readme"
 }
->>>>>>> 024300db000688dbe4be2d8ffd3e287af6703e10
