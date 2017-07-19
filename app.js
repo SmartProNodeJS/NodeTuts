@@ -32,6 +32,8 @@ var matchRoute = require('./routes/match.js');
 app.use("/match", matchRoute);
 var leagueRoute = require('./routes/league.js');
 app.use("/league", leagueRoute);
+var categoryRoute = require('./routes/category.js');
+app.use("/category", categoryRoute);
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
@@ -41,7 +43,7 @@ app.set("view engine","pug");
 
 app.get('/', urlencodedParser, function (req, res) {
     menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
+        //console.log(it.name+" is "+it.active);
         it.active = (it.name=='home')?"active":"";
     });
     res.render("index",{"menu_items":menu_items});
@@ -109,7 +111,6 @@ io.on("connection", function(socket){
 var handle404Pages = function handle404(req, res, next){
   console.log("Response Type: "+ req.accepts('html'));
     menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
         it.active = (it.name=='home')?"active":"";
     });
   res.status(404);
@@ -130,7 +131,7 @@ var handle404Pages = function handle404(req, res, next){
 
 app.use(handle404Pages);
 
-var server = ioHttp.listen(8081, function () {
+var server = ioHttp.listen(8082, function () {
     var host = server.address().address,
     port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);

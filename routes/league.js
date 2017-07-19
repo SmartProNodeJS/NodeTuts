@@ -36,18 +36,20 @@ route.get('/:id',  function (req, res) {
 
     if(idCheck.test(id)) {
       leagues.find({"_id":id}, {}, function(err, leagues){
-        var sportcb = function(err, sport_list){
-           res.render('leagues',{"btn_caption":"Update", "page_title":"Edit League","sport_list":sport_list,"match":matches[0],"menu_items":menu_items});
-           res.end();
-        }
+        sports.find({},{},function(err, sport_list){
+          var matchcb = function(err, match_list){
+            res.render('league',{"btn_caption":"Update", "page_title":"Edit League","sport_list":sport_list,"league":leagues[0],"menu_items":menu_items,"match_list":match_list});
+            res.end();
+          }
        if(err){
           console.log(JSON.stringify(err));
        }else{
-         sports.find({},{}, sportcb);
+         sports.find({},{}, matchcb);
        }
+        })
       });
     }else{
-      var newleague= {"_id":new ObjectID(),"league_name":"","number_match":"","sport_name":""}
+      var newleague= {"_id":new ObjectID(),"league_name":"","number_match":"","sport":""}
          sports.find({},{}, function(err, sport_list){
            res.render('league',{"btn_caption":"Add new","page_title":"Add New League","sport_list":sport_list,"league":newleague,"menu_items":menu_items});
            res.end();
@@ -64,7 +66,7 @@ route.post('/',urlencodedParser,  function (req, res) {
     league.number_match = req.body.number_match;
     db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
       league.sport = s[0];
-      var leagues = db.get("matches");
+      var leagues = db.get("leagues");
       leagues.update({"_id":obj_id},league,{upsert: true}, function(err, added_league){
         if(err) {
           console.log(" Error: "+JSON.stringify(err));
@@ -75,7 +77,24 @@ route.post('/',urlencodedParser,  function (req, res) {
     });
   
 });
-
+route.post('/addmatch', urlencodedParser, function (req, res){
+  var db = req.db;
+  var leagueCol = db.get("leagues");
+  var id = req.body.id;
+  console.log(id);
+  console.log(JSON.stringify(req.body.league_match_list));
+  /*if(req.body.league_match_list){
+    var data = req.body.league_match_list;
+    data.forEach(function(it){
+      leagueCol.update({ "_id": id},{ $push: {"match_list": it}});
+    });
+    res.json(true);
+  }
+  else{
+    res.json(false);
+  }*/
+  res.json(true);
+});
 route.delete('/:id', function (req, res){
   var db = req.db;
   var leagueCol = db.get("leagues");
@@ -87,5 +106,17 @@ route.delete('/:id', function (req, res){
       } 
     });
 });
-
+route.delete('/deletematch/:id/:match_id', function (req, res){
+  var db = req.db;
+  var leagueCol = db.get("leagues");
+  var id = req.params.id;
+  var match_id = req.params.match_id;
+  leagueCol.update({"_id":id}, { $pull: {"match_list": {"_id": match_id}}}, function(err, deletematch){
+    if(err) {
+      console.log(" Error: "+JSON.stringify(err));
+    }else{
+      res.json(true);
+    }
+  });
+});
 module.exports = route;

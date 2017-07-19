@@ -2,15 +2,22 @@ doctype html
 html(lang="en")
   head
     title=page_title
-    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/js/bootstrap-select.min.js")
-    script(src="/socket.io/socket.io.js")
-    script(src="/js/client.js")
-    script(src="/js/team.js")
     link(href="/css/bootstrap.min.css",rel="stylesheet")
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js")
+    link(href="/css/bootstrap-datepicker.min.css",rel="stylesheet")
+    script(src="/js/bootstrap-datepicker.min.js")
+    link(href="/css/bootstrap-clockpicker.min.css",rel="stylesheet")
+    script(src="/js/bootstrap-clockpicker.min.js")
+    script(src="/socket.io/socket.io.js")
+    script(src="/js/player.js")
+    script(src="/js/team.js")
+    script(src="/js/match.js")
+    script(src="/js/league.js")
     link(href="/css/font-awesome-4.7.0/css/font-awesome.min.css",rel="stylesheet")
-    link(rel="stylesheet",href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.3/css/bootstrap-select.min.css")
     link(href="/css/main.css",rel="stylesheet")
+    link(href="/css/bootstrap-multiselect.css",rel="stylesheet")
+    script(src="/js/bootstrap-multiselect.js")
   body
     #wrapper
       nav(class="navbar navbar-inverse navbar-fixed-top",role="navigation")
