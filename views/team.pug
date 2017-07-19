@@ -1,0 +1,25 @@
+extends main.pug
+block content
+        h2(class="sub-header") Teams
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action="/team/", method="POST")
+                input(name="obj_id",type="hidden", value=team._id)
+                .form-group
+                    label(for="name",class="col-sm-2 control-label") Name: 
+                    .col-sm-10
+                      input(name="fname",type="text", class="form-control", id="name", placeholder="Name" value=team.name)
+                .form-group
+                    label(for="leader_id",class="col-sm-2 control-label") Leader: 
+                    .col-sm-10
+                      input(name="leader",type="text", class="form-control", id="leader_id", placeholder="Leader", value=team.leader)
+                .form-group
+                    label(for="player_id",class="col-sm-2 control-label") players: 
+                    .col-sm-10
+                        select(name="player_name",class="form-control", id="player_id")
+                          if player_list
+                            each sp in player_list
+                              option(value=sp.name, selected="selected") #{sp.first_name}
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/team/", class="btn btn-default", role="button") Cancel
