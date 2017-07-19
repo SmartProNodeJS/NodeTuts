@@ -1,0 +1,56 @@
+extends main.pug
+block content
+        h2(class="sub-header") Teams
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action=url_action, method="POST")
+                input(name="obj_id",id="obj_id",type="hidden", value=team._id)
+                .form-group
+                    label(for="team_name",class="col-sm-2 control-label") Team Name: 
+                    .col-sm-10
+                      input(name="team_name",type="text", class="form-control", id="team_name", placeholder="Name" value=team.team_name)
+                .form-group
+                    label(for="number_player",class="col-sm-2 control-label") Number of players: 
+                    .col-sm-10
+                      input(name="number_player",type="number", class="form-control", id="number_player", placeholder="Number of players", value=team.number_player)
+                .form-group
+                    label(for="sport_id",class="col-sm-2 control-label") Sports: 
+                    .col-sm-10
+                        select(name="sport_name",class="form-control", id="sport_id", onchange="onchangeSport()")
+                          if sport_list
+                            each sp in sport_list
+                                if(sp.name == team.sport.name)
+                                    option(value=sp.name, selected) #{sp.desc}
+                                else
+                                    option(value=sp.name) #{sp.desc}  
+                if player_list
+                    .form-group
+                        label(for="team_player_list",class="col-sm-2 control-label") Players: 
+                        .col-sm-10
+                            select(name="team_player_list",class="form-control", multiple="multiple", id="team_player_list")
+                                each pl in player_list
+                                        option(value=pl) #{pl.first_name + " " + pl.last_name}
+                    .form-group
+                        button(type="button", class="btn btn-success btn-sm", onclick="add_team_player();") Add Players
+                .form-group
+                    div(id="teamPlayer")
+                         table.table.table-bordered.table-hover
+                            tr
+                                th #
+                                th First Name
+                                th Last Name
+                                th Actions
+                            if (team.player_list)
+                                each u, i in team.player_list
+                                    tr
+                                        td #{i+1}
+                                        td #{u.first_name}
+                                        td #{u.last_name}
+                                        td 
+                                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_team_player('"+u._id+"');") Remove
+                            else
+                                tr
+                                    td(colspan=4) No Players                      
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/team/", class="btn btn-default", role="button") Cancel

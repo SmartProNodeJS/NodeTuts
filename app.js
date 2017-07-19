@@ -25,11 +25,11 @@ app.use(function(request, res, next){
   next();
 });
 var playerRoute = require('./routes/player.js');
-var teamerRoute = require('./routes/teamer.js');
-
 app.use("/player", playerRoute);
-app.use("/teamer",teamerRoute);
-
+var teamRoute = require('./routes/team.js');
+app.use("/team", teamRoute);
+var categoryRoute = require('./routes/category.js');
+app.use("/category", categoryRoute);
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
@@ -39,7 +39,7 @@ app.set("view engine","pug");
 
 app.get('/', urlencodedParser, function (req, res) {
     menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
+        //console.log(it.name+" is "+it.active);
         it.active = (it.name=='home')?"active":"";
     });
     res.render("index",{"menu_items":menu_items});
@@ -107,7 +107,6 @@ io.on("connection", function(socket){
 var handle404Pages = function handle404(req, res, next){
   console.log("Response Type: "+ req.accepts('html'));
     menu_items.forEach(function(it){
-        console.log(it.name+" is "+it.active);
         it.active = (it.name=='home')?"active":"";
     });
   res.status(404);
