@@ -5,8 +5,10 @@ block content
         table.table.table-bordered.table-hover
             tr
                 th #
-                th League Name
+                th Name Of League
                 th Number of match
+                th Starting Date
+                th End Date
                 th Sport Name
                 th Actions
             if (leagues.length)
@@ -15,6 +17,8 @@ block content
                         td #{i+1}
                         td #{u.league_name}
                         td #{u.number_match}
+                        td #{u.date_start}
+                        td #{u.date_end}
                         if u.sport
                           td #{u.sport.desc}
                         else 
