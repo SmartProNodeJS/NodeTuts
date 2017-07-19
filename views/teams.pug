@@ -1,0 +1,32 @@
+extends main
+block pageScript
+  script(src="/js/team.js")
+block content
+  h2(class="sub-header") Teams
+  #gvTeams
+  #dlgTeam
+    .container-fluid
+      .row
+        .col-md-12
+          label Team name
+          br
+          input#txtTeamName.k-input.k-textbox(type='text', style='width: 100%')
+          input#hfTeamId(type="hidden")
+      .row
+        .col-md-12
+          label Sport name
+          br
+          input#ddlSport(style='width: 200px')
+      .row
+        .col-md-12
+          label Players
+          br
+          input#mtsPlayers(style='width: 100%')
+      .row
+        .col-md-12.text-right
+          button#btnCancel.k-button.k-button-icontext(type="button")
+            i.fa.fa-remove
+            |  Cancel
+          button#btnSave.k-button.k-button-icontext.k-primary(type="button")
+            i.fa.fa-floppy-o
+            |  Save

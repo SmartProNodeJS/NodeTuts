@@ -1,23 +1,32 @@
 extends main.pug
+block pageScript
+    script.
+        $(function () {
+            if (!$('#f_name').val()) {
+                $('#f_name').val(randomSentence(2));
+                $('#l_name').val(randomSentence(1));
+                $('#age_id').val(parseInt(Math.random() * 21) + 18);
+            }
+        });
 block content
         h2(class="sub-header") Players
         div(style={width: "60%"})
             form.form-horizontal(name="registerForm", action="/player/", method="POST")
                 input(name="obj_id",type="hidden", value=player._id)
                 .form-group
-                    label(for="f_name",class="col-sm-2 control-label") First Name: 
+                    label(for="f_name",class="col-sm-2 control-label") First Name:
                     .col-sm-10
                       input(name="first_name",type="text", class="form-control", id="f_name", placeholder="First Name" value=player.first_name)
                 .form-group
-                    label(for="l_name",class="col-sm-2 control-label") Last Name: 
+                    label(for="l_name",class="col-sm-2 control-label") Last Name:
                     .col-sm-10
                       input(name="last_name",type="text", class="form-control", id="l_name", placeholder="Last Name", value=player.last_name)
                 .form-group
-                    label(for="age_id",class="col-sm-2 control-label") Age: 
+                    label(for="age_id",class="col-sm-2 control-label") Age:
                     .col-sm-10
                       input(name="age",type="text", class="form-control", id="age_id", placeholder="Age", value=player.age)
                 .form-group
-                    label(for="sport_id",class="col-sm-2 control-label") Sports: 
+                    label(for="sport_id",class="col-sm-2 control-label") Sports:
                     .col-sm-10
                         select(name="sport_name",class="form-control", id="sport_id")
                           if sport_list
