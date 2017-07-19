@@ -4,9 +4,13 @@ html(lang="en")
     title=page_title
     link(href="/css/bootstrap.min.css",rel="stylesheet")
     link(href="/css/font-awesome-4.7.0/css/font-awesome.min.css",rel="stylesheet")
+    link(href="/kendo/kendo.common-bootstrap.min.css",rel="stylesheet")
+    link(href="/kendo/kendo.bootstrap.min.css",rel="stylesheet")
     link(href="/css/main.css",rel="stylesheet")
-    script(src="/js/jquery.min.js")
+    script(src="/kendo/jquery.min.js")
+    script(src="/kendo/kendo.all.min.js")
     script(src="/js/client.js")
+    block pageScript
   body
     #wrapper
       nav(class="navbar navbar-inverse navbar-fixed-top",role="navigation")
@@ -23,7 +27,8 @@ html(lang="en")
               each item in menu_items
                 li(class=item.active)
                   a(href=item.url)
-                    i(class="fa fa-fw "+item.icon) &nbsp;#{item.title}
+                    i(class="fa fa-fw "+item.icon)
+                    |  #{item.title}
       #page-wrapper
         div(class="container-fluid")
           block content

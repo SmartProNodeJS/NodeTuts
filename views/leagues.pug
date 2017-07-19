@@ -1,0 +1,47 @@
+extends main
+block pageScript
+  script(src="/js/league.js")
+block content
+  h2(class="sub-header") Leagues
+  #gvLeagues
+  #dlgLeague
+    .container-fluid
+      .row
+        .col-md-12
+          label Name
+          br
+          input#txtLeagueName.k-input.k-textbox(type='text', style='width: 250px')
+          input#hfLeagueId(type="hidden")
+      .row
+        .col-md-12
+          label Date start
+          br
+          input#dpStart(style='width: 120px')
+      .row
+        .col-md-12
+          label Date end
+          br
+          input#dpEnd(style='width: 120px')
+      .row
+        .col-md-12
+          label Sponsors
+          br
+          #lvSponsors(style="width: 100%")
+          label(style="margin: 0 5px 0 15px") Name
+          input#txtSponsor.k-input.k-textbox(type='text', style='width: 200px')
+          button#btnAddSponsor.k-button.k-button-icontext(type="button")
+            i.fa.fa-plus
+            |  Add
+      .row
+        .col-md-12
+          label Organiser
+          br
+          input#txtOrganiser.k-input.k-textbox(type='text', style='width: 250px')
+      .row
+        .col-md-12.text-right
+          button#btnCancel.k-button.k-button-icontext(type="button")
+            i.fa.fa-remove
+            |  Cancel
+          button#btnSave.k-button.k-button-icontext.k-primary(type="button")
+            i.fa.fa-floppy-o
+            |  Save
