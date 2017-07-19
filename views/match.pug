@@ -1,0 +1,33 @@
+extends main.pug
+block content
+        h2(class="sub-header") Matchs
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action="/match/", method="POST")
+                input(name="obj_id",type="hidden", value=match._id)
+                .form-group
+                    label(for="m_name",class="col-sm-2 control-label") Match Name: 
+                    .col-sm-10
+                      input(name="match_name",type="text", class="form-control", id="m_name", placeholder="Match Name" value=match.match_name)
+                .form-group
+                    label(for="d_start",class="col-sm-2 control-label") Datetime start: 
+                    .col-sm-10
+                      input(name="datetime_start",type="text", class="form-control", id="d_start", placeholder="Datetime start", value=match.datetime_start)
+                .form-group
+                    label(for="d_end",class="col-sm-2 control-label") Datetime end: 
+                    .col-sm-10
+                      input(name="datetime_end",type="text", class="form-control", id="d_end", placeholder="Datetime end", value=match.datetime_end)
+                .form-group
+                    label(for="team_id",class="col-sm-2 control-label") Teams: 
+                    .col-sm-10
+                        select(name="team_name",class="form-control", id="team_id")
+                          if team_list
+                            each sp in team_list
+                              option(value=sp.name, selected="selected") #{sp.desc}
+                .form-group
+                    label(for="score",class="col-sm-2 control-label") Score: 
+                    .col-sm-10
+                      input(name="score",type="text", class="form-control", id="score", placeholder="Score", value=match.score)
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/match/", class="btn btn-default", role="button") Cancel

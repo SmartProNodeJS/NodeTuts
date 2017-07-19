@@ -33,3 +33,29 @@ function edit_player(_id){
     }
   });
 }
+
+function delete_match(_id){
+  $.ajax({
+    method: "DELETE",
+    url: "/match/"+_id,
+    success: function( msg ) {
+      location.href="/match/";
+    },
+    error: function( msg ) {
+      alert( "Error - " + msg.msgText );
+    }
+  });
+}
+
+function edit_match(_id){
+  $.ajax({
+    method: "GET",
+    url: "/match/"+_id,
+    success: function( msg ) {
+      location.href="/match/";
+    },
+    error: function( msg ) {
+      alert( "Error - " + msg.msgText );
+    }
+  });
+}
