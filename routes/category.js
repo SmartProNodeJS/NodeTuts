@@ -28,5 +28,16 @@ route.get("/team_list_players/:sport_name", function(req, res) {
       }
     });   
 });
-
+route.get("/list_match_league/:sport_name", function(req, res) {
+    var db = req.db;
+    var matchCol = db.get("matchs");
+    console.log(req.params.sport_name);
+    matchCol.find({"sport.name":req.params.sport_name},{}, function(err, matchs){
+      if(err) {
+        console.log(" Error: "+JSON.stringify(err));
+      }else{
+        res.json(matchs);
+      }
+    });   
+});
 module.exports = route;

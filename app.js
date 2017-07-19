@@ -30,6 +30,8 @@ var teamRoute = require('./routes/team.js');
 app.use("/team", teamRoute);
 var matchRoute = require('./routes/match.js');
 app.use("/match", matchRoute);
+var leagueRoute = require('./routes/league.js');
+app.use("/league", leagueRoute);
 var categoryRoute = require('./routes/category.js');
 app.use("/category", categoryRoute);
 // Create application/x-www-form-urlencoded parser
