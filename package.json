@@ -12,7 +12,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "mocha": "^3.4.2",
-    "mongodb": "^2.2.29",
+    "mongodb": "^2.2.30",
     "monk": "^6.0.1",
     "nodemon": "^1.11.0",
     "promise": "^8.0.0",

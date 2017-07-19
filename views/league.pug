@@ -1,0 +1,30 @@
+extends main.pug
+block content
+        h2(class="sub-header") Leagues
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action="/league/", method="POST")
+                input(name="obj_id",type="hidden", value=league._id)
+                .form-group
+                    label(for="name",class="col-sm-2 control-label") League Name: 
+                    .col-sm-10
+                      input(name="name",type="text", class="form-control", id="name", placeholder="League Name" value=league.name)
+                .form-group
+                    label(for="date_start",class="col-sm-2 control-label") Date Start: 
+                    .col-sm-10
+                      input(name="date_start",type="text", class="form-control", id="date_start", placeholder="Date Start", value=league.date_start)
+                .form-group
+                    label(for="date_end",class="col-sm-2 control-label") Date End: 
+                    .col-sm-10
+                      input(name="date_end",type="text", class="form-control", id="date_end", placeholder="Date End", value=league.date_end)
+                .form-group
+                    label(for="sponsors",class="col-sm-2 control-label") Sponsors: 
+                    .col-sm-10
+                      input(name="sponsors",type="text", class="form-control", id="sponsors", placeholder="Sponsors", value=league.sponsors)
+                .form-group
+                    label(for="organiser",class="col-sm-2 control-label") Organiser: 
+                    .col-sm-10
+                      input(name="organiser",type="text", class="form-control", id="organiser", placeholder="Organiser", value=league.organiser)
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/league/", class="btn btn-default", role="button") Cancel

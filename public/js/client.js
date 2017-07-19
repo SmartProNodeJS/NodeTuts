@@ -33,3 +33,29 @@ function edit_player(_id){
     }
   });
 }
+
+function delete_league(_id){
+  $.ajax({
+    method: "DELETE",
+    url: "/league/"+_id,
+    success: function( msg ) {
+      location.href="/league/";
+    },
+    error: function( msg ) {
+      alert( "Error - " + msg.msgText );
+    }
+  });
+}
+
+function edit_league(_id){
+  $.ajax({
+    method: "GET",
+    url: "/league/"+_id,
+    success: function( msg ) {
+      location.href="/league/";
+    },
+    error: function( msg ) {
+      alert( "Error - " + msg.msgText );
+    }
+  });
+}
