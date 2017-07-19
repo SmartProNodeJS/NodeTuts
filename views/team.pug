@@ -1,0 +1,29 @@
+extends main.pug
+block content
+        h2(class="sub-header") Teams
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action="/team/", method="POST")
+                input(name="obj_id",type="hidden", value=team._id)
+                .form-group
+                    label(for="f_name",class="col-sm-2 control-label") First Name: 
+                    .col-sm-10
+                      input(name="first_name",type="text", class="form-control", id="f_name", placeholder="First Name" value=team.first_name)
+                .form-group
+                    label(for="l_name",class="col-sm-2 control-label") Last Name: 
+                    .col-sm-10
+                      input(name="last_name",type="text", class="form-control", id="l_name", placeholder="Last Name", value=team.last_name)
+                .form-group
+                    label(for="init_year",class="col-sm-2 control-label") Init Year: 
+                    .col-sm-10
+                      input(name="init_year",type="text", class="form-control", id="init_year_id", placeholder="Init Year", value=team.init_year)
+                .form-group
+                    label(for="sport_id",class="col-sm-2 control-label") Sports: 
+                    .col-sm-10
+                        select(name="sport_name",class="form-control", id="sport_id")
+                          if sport_list
+                            each sp in sport_list
+                              option(value=sp.name, selected="selected") #{sp.desc}
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/team/", class="btn btn-default", role="button") Cancel

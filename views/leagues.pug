@@ -1,0 +1,28 @@
+extends main.pug
+block content
+        h2(class="sub-header") Leagues
+        a(href="/league/add", class="btn btn-primary active", role="button") Add New
+        table.table.table-bordered.table-hover
+            tr
+                th #
+                th League Name
+                th Starting Date
+                th End Date
+                th Sponsors
+                th Organiser
+                th Actions
+            if (leagues.length)
+                each u, i in leagues
+                    tr
+                        td #{i+1}
+                        td #{u.league_name}
+                        td #{u.date_start}
+                        td #{u.date_end}
+                        td #{u.sponsors}
+                        td #{u.organiser}
+                        td 
+                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_league('"+u._id+"');") Remove
+                            a(href="/league/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
+            else
+                tr
+                    td(colspan=5) No Leagues
