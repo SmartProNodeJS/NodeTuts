@@ -28,12 +28,6 @@ var playerRoute = require('./routes/player.js');
 app.use("/player", playerRoute);
 var teamRoute = require('./routes/team.js');
 app.use("/team", teamRoute);
-var matchRoute = require('./routes/match.js');
-app.use("/match", matchRoute);
-var leagueRoute = require('./routes/league.js');
-app.use("/league", leagueRoute);
-var categoryRoute = require('./routes/category.js');
-app.use("/category", categoryRoute);
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
@@ -131,7 +125,7 @@ var handle404Pages = function handle404(req, res, next){
 
 app.use(handle404Pages);
 
-var server = ioHttp.listen(8082, function () {
+var server = ioHttp.listen(8081, function () {
     var host = server.address().address,
     port = server.address().port;
     console.log("Example app listening at http://%s:%s", host, port);
