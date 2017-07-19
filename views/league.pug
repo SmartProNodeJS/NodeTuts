@@ -21,6 +21,10 @@ block content
                     .col-sm-8
                       input(name="date_end",type="date", class="form-control", id="date_end", placeholder="End Date", value=league.date_end)
                 .form-group
+                    label(for="sponsors_name",class="col-sm-4 control-label") Sponsors: 
+                    .col-sm-8
+                      input(name="sponsors_name",type="text", class="form-control", id="sponsors_name", placeholder="Sponsors" value=league.sponsors_name)
+                .form-group
                     label(for="sport_id",class="col-sm-4 control-label") Sports: 
                     .col-sm-8
                         select(name="sport_name",class="form-control", id="sport_id", onchange="onchangeSport_League()")

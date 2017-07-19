@@ -9,6 +9,7 @@ block content
                 th Number of match
                 th Starting Date
                 th End Date
+                th Sponsors
                 th Sport Name
                 th Actions
             if (leagues.length)
@@ -19,6 +20,7 @@ block content
                         td #{u.number_match}
                         td #{u.date_start}
                         td #{u.date_end}
+                        td #{u.sponsors_name}
                         if u.sport
                           td #{u.sport.desc}
                         else 

@@ -49,7 +49,7 @@ route.get('/:id',  function (req, res) {
         })
       });
     }else{
-      var newleague= {"_id":new ObjectID(),"league_name":"","number_match":"","date_start":"","date_end":"","sport":""}
+      var newleague= {"_id":new ObjectID(),"league_name":"","number_match":"","date_start":"","date_end":"","sponsors_name":"","sport":""}
          sports.find({},{}, function(err, sport_list){
            res.render('league',{"btn_caption":"Add new","page_title":"Add New League","sport_list":sport_list,"league":newleague,"menu_items":menu_items});
            res.end();
@@ -66,6 +66,7 @@ route.post('/',urlencodedParser,  function (req, res) {
     league.number_match = req.body.number_match;
     league.date_start = req.body.date_start;
     league.date_end = req.body.date_end;
+    league.sponsors_name = req.body.sponsors_name;
     db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
       league.sport = s[0];
       var leagues = db.get("leagues");
