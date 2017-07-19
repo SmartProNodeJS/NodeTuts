@@ -31,13 +31,15 @@ route.get('/:id',  function (req, res) {
     var db = req.db;
     var players = db.get("players");
     var sports = db.get("sports");
+    var sex = db.get("sex");
     var id = String(req.params.id);
     var idCheck = new RegExp("^[0-9a-fA-F]{24}$");
 
     if(idCheck.test(id)) {
       players.find({"_id":id}, {}, function(err, players){
-        var sportcb = function(err, sport_list){
-           res.render('player',{"btn_caption":"Update", "page_title":"Edit Player","sport_list":sport_list,"player":players[0],"menu_items":menu_items});
+        sex.find({},{},function(err,sex_list){
+          var sportcb = function(err, sport_list){
+           res.render('player',{"btn_caption":"Update", "page_title":"Edit Player","sport_list":sport_list,"player":players[0],"menu_items":menu_items,"sex":sex_list});
            res.end();
         }
        if(err){
@@ -45,12 +47,15 @@ route.get('/:id',  function (req, res) {
        }else{
          sports.find({},{}, sportcb);
        }
+        });
       });
     }else{
-      var newplayer = {"_id":new ObjectID(),"first_name":"","last_name":"",age:"","sport_name":""}
+      var newplayer = {"_id":new ObjectID(),"first_name":"","last_name":"","age":"","sex":"","sport_name":""}
          sports.find({},{}, function(err, sport_list){
-           res.render('player',{"btn_caption":"Add new","page_title":"Add New Player","sport_list":sport_list,"player":newplayer,"menu_items":menu_items});
-           res.end();
+           sex.find({},{},function(err, sex_list){
+            res.render('player',{"btn_caption":"Add new","page_title":"Add New Player","sport_list":sport_list,"player":newplayer,"menu_items":menu_items,"sex":sex_list});
+            res.end();
+           });
          });
     }
 }); 
@@ -64,15 +69,19 @@ route.post('/',urlencodedParser,  function (req, res) {
     user.last_name = req.body.last_name;
     user.age = req.body.age;
     db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
-      user.sport = s[0];
-      var users = db.get("players");
-      users.update({"_id":obj_id},user,{upsert: true}, function(err, added_user){
-        if(err) {
-          console.log(" Error: "+JSON.stringify(err));
-        }else{
-          res.redirect("/player/")
-        }
-      });    
+      db.get('sex').find({"name":req.body.sex_name},{},function(err, sex_list){
+          console.log(sex_list[0]);
+          user.sport = s[0];
+          user.sex = sex_list[0];
+          var users = db.get("players");
+          users.update({"_id":obj_id},user,{upsert: true}, function(err, added_user){
+          if(err) {
+            console.log(" Error: "+JSON.stringify(err));
+          }else{
+            res.redirect("/player/")
+          }
+        }); 
+      }); 
     });
   
 });

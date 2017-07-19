@@ -17,12 +17,32 @@ block content
                     .col-sm-10
                       input(name="age",type="text", class="form-control", id="age_id", placeholder="Age", value=player.age)
                 .form-group
+                    label(for="sex_name",class="col-sm-2 control-label") Sex: 
+                    .col-sm-10
+                        select(name="sex_name",class="form-control", id="sex_name")
+                          if sex
+                            each s in sex
+                                if(player.sex)
+                                    if(s.name == player.sex.name)
+                                        option(value=s.name, selected) #{s.desc}
+                                    else
+                                        option(value=s.name) #{s.desc}
+                                else
+                                    option(value=s.name) #{s.desc}
+                                
+                .form-group
                     label(for="sport_id",class="col-sm-2 control-label") Sports: 
                     .col-sm-10
                         select(name="sport_name",class="form-control", id="sport_id")
                           if sport_list
                             each sp in sport_list
-                              option(value=sp.name, selected="selected") #{sp.desc}
+                                if(player.sport)
+                                    if(sp.name == player.sport.name)
+                                        option(value=sp.name, selected) #{sp.desc}
+                                    else
+                                        option(value=sp.name) #{sp.desc}
+                                else
+                                    option(value=sp.name) #{sp.desc}
                 .form-group
                     .col-sm-offset-2.col-sm-10
                         button(type="submit",class="btn btn-primary active") #{btn_caption}

@@ -33,3 +33,16 @@ function edit_team(_id){
     }
   });
 }
+
+function delete_player(_id){
+  $.ajax({
+    method: "DELETE",
+    url: "/player/"+_id,
+    success: function( msg ) {
+      location.href="/player/";
+    },
+    error: function( msg ) {
+      alert( "Error - " + msg.msgText );
+    }
+  });
+}
