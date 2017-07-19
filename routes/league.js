@@ -18,6 +18,7 @@ route.use(function(req, res, next){
 route.get("/", function(req, res) {
     var db = req.db;
     var leagueCol = db.get("leagues");
+    
     leagueCol.find({},{}, function(err, leagues){
       if(err) {
         console.log(" Error: "+JSON.stringify(err));
@@ -29,11 +30,12 @@ route.get("/", function(req, res) {
 
 route.get('/:id',  function (req, res) {
     var db = req.db;
+    var match = {};
     var leagues = db.get("leagues");
     var sports = db.get("sports");
     var id = String(req.params.id);
     var idCheck = new RegExp("^[0-9a-fA-F]{24}$");
-
+    
     if(idCheck.test(id)) {
       leagues.find({"_id":id}, {}, function(err, leagues){
         sports.find({},{},function(err, sport_list){
@@ -49,7 +51,7 @@ route.get('/:id',  function (req, res) {
         })
       });
     }else{
-      var newleague= {"_id":new ObjectID(),"league_name":"","number_match":"","sport":""}
+      var newleague= {"_id":new ObjectID(),"league_name":"","number_match":"","match_date":"","match_time":"","sport":""}
          sports.find({},{}, function(err, sport_list){
            res.render('league',{"btn_caption":"Add new","page_title":"Add New League","sport_list":sport_list,"league":newleague,"menu_items":menu_items});
            res.end();
@@ -64,6 +66,8 @@ route.post('/',urlencodedParser,  function (req, res) {
     var obj_id = req.body.obj_id;
     league.league_name = req.body.league_name;
     league.number_match = req.body.number_match;
+    league.match_date = req.body.match_date;
+    league.match_time = req.body.match_time;
     db.get('sports').find({"name":req.body.sport_name},{},function(err, s){
       league.sport = s[0];
       var leagues = db.get("leagues");
@@ -81,6 +85,8 @@ route.post('/addmatch', urlencodedParser, function (req, res){
   var db = req.db;
   var leagueCol = db.get("leagues");
   var matchCol = db.get("matchs");
+  leagueCol.match_date = req.body.match_date;
+  leagueCol.match_time = req.body.match_time;
   var id = req.body.id;
   if(JSON.parse(req.body.league_match_list)){
     var data = JSON.parse(req.body.league_match_list);

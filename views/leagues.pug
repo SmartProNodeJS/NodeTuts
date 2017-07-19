@@ -6,8 +6,10 @@ block content
             tr
                 th #
                 th League Name
-                th Number of match
-                th Sport Name
+                th Organiser
+                th League Date
+                th League Time
+                th Sponsor Name
                 th Actions
             if (leagues.length)
                 each u, i in leagues
@@ -15,6 +17,8 @@ block content
                         td #{i+1}
                         td #{u.league_name}
                         td #{u.number_match}
+                        td #{u.match_date}
+                        td #{u.match_time}
                         if u.sport
                           td #{u.sport.desc}
                         else 
