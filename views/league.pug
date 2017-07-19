@@ -1,0 +1,56 @@
+extends main.pug
+block content
+        h2(class="sub-header") Leagues
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerForm", action="/league/", method="POST")
+                input(name="obj_id",id="obj_id",type="hidden", value=league._id)
+                .form-group
+                    label(for="league_name",class="col-sm-4 control-label") League Name: 
+                    .col-sm-8
+                      input(name="league_name",type="text", class="form-control", id="league_name", placeholder="League Name" value=league.league_name)
+                .form-group
+                    label(for="number_match",class="col-sm-4 control-label") Number of matches: 
+                    .col-sm-8
+                      input(name="number_match",type="number", class="form-control", id="number_match", placeholder="Number of teams", value=league.number_match)
+                .form-group
+                    label(for="sport_id",class="col-sm-4 control-label") Sports: 
+                    .col-sm-8
+                        select(name="sport_name",class="form-control", id="sport_id", onchange="onchangeSport_League()")
+                          if sport_list
+                            each sp in sport_list
+                                if(sp.name == league.sport.name)
+                                    option(value=sp.name, selected) #{sp.desc}
+                                else
+                                    option(value=sp.name) #{sp.desc}
+                if match_list
+                    .form-group
+                        label(for="league_match_list",class="col-sm-4 control-label") Matches: 
+                        .col-sm-8
+                            select(name="league_match_list",class="form-control", multiple="multiple", id="league_match_list")
+                    .form-group
+                        button(type="button", class="btn btn-success btn-sm", onclick="add_league_match();") Add Matches
+                .form-group
+                    div(id="league_match")
+                         table.table.table-bordered.table-hover
+                            tr
+                                th #
+                                th Match date
+                                th Match time
+                                th Match score
+                                th Actions
+                            if (league.match_list)
+                                each u, i in league.match_list
+                                    tr
+                                        td #{i+1}
+                                        td #{u.match_date}
+                                        td #{u.match_time}
+                                        td #{u.match_score}
+                                        td 
+                                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_league_match('"+u._id+"');") Remove
+                            else
+                                tr
+                                    td(colspan=8) No Matchs    
+                .form-group
+                    .col-sm-offset-4.col-sm-8
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/league/", class="btn btn-default", role="button") Cancel
