@@ -26,6 +26,11 @@ app.use(function(request, res, next){
 });
 var playerRoute = require('./routes/player.js');
 app.use("/player", playerRoute);
+var matchRoute = require('./routes/match.js');
+app.use("/match", matchRoute);
+var categoryRoute = require('./routes/category.js');
+app.use("/category", categoryRoute);
+
 // Create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
 app.use(express.static("public/"));
@@ -68,6 +73,28 @@ app.post('/sport',urlencodedParser, function(req, res) {
         console.log("Error: "+err);
     }); 
 });
+
+var Teams = require('./models/teams');
+
+app.get('/teams',function(req, res) {
+    Teams.findAll().then(function(teams){
+    //console.log("Sports: "+JSON.stringify(sports));
+    res.status(200).json(teams);
+    }).catch(function(err){
+        console.log("Error: "+err);
+    });
+});
+app.get('/team/:name',function(req, res) {
+    Teams.findByName(req.params.name).then(function(teams){
+        console.log("Teams with name (Manchester): "+JSON.stringify(teams));
+        res.status(200).json(teams[0]);
+    }).catch(function(err){
+        console.log("Error: "+err);
+    }); 
+});
+
+
+
 
 var ioHttp = http.Server(app);
 

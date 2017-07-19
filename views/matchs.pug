@@ -1,0 +1,32 @@
+extends main.pug
+block content
+        h2(class="sub-header") Matches
+        a(href="/match/add", class="btn btn-primary active", role="button") Add New
+        table.table.table-bordered.table-hover
+            tr
+                th #
+                th Match Name
+                th Starting date
+                th Ending date
+                th Team one
+                th Team two
+                th Score team1
+                th Score team2
+                th Actions
+            if (matches.length)
+                each u, i in matches
+                    tr
+                        td #{i+1}
+                        td #{u.match_name}
+                        td #{u.datetime_start}
+                        td #{u.datetime_end}
+                        td #{u.team1.name}
+                        td #{u.team2.name}
+                        td #{u.score.team1}
+                        td #{u.score.team2}
+                        td 
+                            button(type="button", class="btn btn-danger btn-sm", onclick="delete_match('"+u._id+"');") Remove
+                            a(href="/match/"+u._id, class="btn btn-primary btn-sm active", role="button") Edit
+            else
+                tr
+                    td(colspan=9) No Matches

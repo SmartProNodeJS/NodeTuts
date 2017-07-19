@@ -1,0 +1,50 @@
+extends main.pug
+block content
+        h2(class="sub-header") Matches
+        div(style={width: "60%"})
+            form.form-horizontal(name="registerMatchForm", action=url_action, method="POST")
+                input(name="obj_id",id="obj_id",type="hidden", value=match._id)
+                .form-group
+                    label(for="match_name",class="col-sm-2 control-label") Name : 
+                    .col-sm-10
+                      input(name="match_name",type="text", class="form-control", id="match_name", placeholder="Match name" value=match.name)
+                .form-group
+                    label(for="datetime_start",class="col-sm-2 control-label") Starting Date: 
+                    .col-sm-10
+                      input(name="datetime_start",type="text", class="form-control", id="datetime_start", placeholder="Starting Date" value=match.datetime_start)
+                .form-group
+                    label(for="datetime_end",class="col-sm-2 control-label") Ending Date: 
+                    .col-sm-10
+                      input(name="datetime_end",type="text", class="form-control", id="datetime_end", placeholder="Ending Date", value=match.datetime_end)
+                .form-group
+                    label(for="team1_id",class="col-sm-2 control-label") Team 1: 
+                    .col-sm-10
+                        select(name="team1_name",class="form-control", id="team1_id")
+                          if team_list
+                            each tm in team_list
+                                if(tm.name == match.team1.name)
+                                    option(value=tm.name, selected) #{tm.name}
+                                else
+                                    option(value=tm.name) #{tm.name} 
+                .form-group
+                    label(for="team2_id",class="col-sm-2 control-label") Team 2: 
+                    .col-sm-10
+                        select(name="team2_name",class="form-control", id="team2_id")
+                          if team_list
+                            each tm in team_list
+                                if(tm.name == match.team2.name)
+                                    option(value=tm.name, selected) #{tm.name}
+                                else
+                                    option(value=tm.name) #{tm.name} 
+                .form-group
+                    label(for="score_team1",class="col-sm-2 control-label") Score team 1: 
+                    .col-sm-10
+                      input(name="score_team1",type="text", class="form-control", id="score_team1", placeholder="Score team 1", value=match.score.team1)
+                .form-group
+                    label(for="score_team2",class="col-sm-2 control-label") Score team 1: 
+                    .col-sm-10
+                      input(name="score_team2",type="text", class="form-control", id="score_team2", placeholder="Score team 2", value=match.score.team2)
+                .form-group
+                    .col-sm-offset-2.col-sm-10
+                        button(type="submit",class="btn btn-primary active") #{btn_caption}
+                        a(href="/match/", class="btn btn-default", role="button") Cancel
